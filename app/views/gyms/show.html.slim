@@ -6,3 +6,7 @@ p
   = @gym.number
 p
   = @gym.address
+
+= link_to "戻る", root_path
+= link_to "編集", edit_gym_path(@gym)
+= link_to "削除", gym_path(@gym), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }
