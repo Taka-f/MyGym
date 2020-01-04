@@ -8,11 +8,11 @@ class GymsController < ApplicationController
   end
 
   def new
-    @gym = Gym.new
+    @gym = current_user.gym.build
   end
 
   def create
-    @gym = Gym.new(gym_params)
+    @gym = current_user.gym.build(gym_params)
 
     if @gym.save
       redirect_to root_path
