@@ -35,7 +35,7 @@ class GymsController < ApplicationController
   def destroy
     @gym.destroy
     redirect_to root_path
-  end
+  end 
 
   private
 
