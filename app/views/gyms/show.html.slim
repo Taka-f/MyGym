@@ -1,12 +1,15 @@
-h1
+h2
   = @gym.name
-h3
+p
   = @gym.description
 p
   = @gym.number
 p
   = @gym.address
 
-= link_to "戻る", root_path
-= link_to "編集", edit_gym_path(@gym)
-= link_to "削除", gym_path(@gym), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }
+.links.btn-group
+  = link_to "戻る", root_path
+  - if user_signed_in?
+    - if @gym.user_id == current_user.id
+      = link_to "編集", edit_gym_path(@gym)
+      = link_to "削除", gym_path(@gym), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }
