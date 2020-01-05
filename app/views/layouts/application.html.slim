@@ -7,7 +7,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    nav.navbar.navbar-default
+    nav.navbar.navbar-inverse
       .container
         .navbar-header
           = link_to "GymMap", root_path, class: "navbar-brand"
@@ -23,6 +23,15 @@ html
               = link_to "ログイン", new_user_session_path
 
         ul.nav.navbar-nav
+          li.dropdown
+            a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+              | エリア
+              span.caret
+            
+            ul.dropdown-menu role="menu"
+              - Area.all.each do |area|
+                li class="#{'active' if params[:area] == area.name}"
+                  = link_to area.name, gyms_path(area: area.name), class: "link"
           - if user_signed_in?
             li
               = link_to "ジムを投稿", new_gym_path
