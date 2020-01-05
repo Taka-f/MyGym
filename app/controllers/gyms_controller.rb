@@ -8,11 +8,13 @@ class GymsController < ApplicationController
   end
 
   def new
-    @gym = current_user.gym.build
+    @gym = current_user.gyms.build
+    @areas = Area.all.map{ |a| [a.name, a.id] }
   end
 
   def create
-    @gym = current_user.gym.build(gym_params)
+    @gym = current_user.gyms.build(gym_params)
+    @gym.area_id = params[:area_id]
 
     if @gym.save
       redirect_to root_path
@@ -22,9 +24,12 @@ class GymsController < ApplicationController
   end
 
   def edit
+    @areas = Area.all.map{ |a| [a.name, a.id] }
   end
 
   def update
+    @gym.area_id = params[:area_id]
+
     if @gym.update(gym_params)
       redirect_to gym_path(@gym)
     else
@@ -40,7 +45,7 @@ class GymsController < ApplicationController
   private
 
   def gym_params
-    params.require(:gym).permit(:name, :description, :number, :address)
+    params.require(:gym).permit(:name, :description, :number, :address, :area_id)
   end
 
   def find_gym
