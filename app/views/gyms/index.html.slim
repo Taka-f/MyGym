@@ -1,4 +1,9 @@
-- @gyms.each do |gym|
-  h2
-    = link_to gym.name, gym_path(gym)
+h1.current-area
+  = params[:area]
+- if @gyms.count == 0
+  h4 このエリアの投稿はありません
+- else
+  - @gyms.each do |gym|
+    h2
+      = link_to gym.name, gym_path(gym)
 

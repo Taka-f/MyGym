@@ -1,7 +1,12 @@
 class GymsController < ApplicationController
   before_action :find_gym, only: [:show, :edit, :update, :destroy]
   def index
-    @gyms = Gym.all.order("created_at DESC")
+    if params[:area].blank?
+      @gyms = Gym.all.order("created_at DESC")
+    else
+      @area_id = Area.find_by(name: params[:area]).id
+      @gyms = Gym.where(area_id: @area_id).order("created_at DESC")
+    end
   end
 
   def show
