@@ -37,6 +37,8 @@ gem 'html2slim'
 gem 'simple_form'
 gem 'bootstrap-sass'
 gem 'devise', '~> 4.7', '>= 4.7.1'
+gem 'carrierwave', '1.2.2'
+gem 'mini_magick', '4.7.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,6 +55,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+  gem 'fog',  '1.42'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
