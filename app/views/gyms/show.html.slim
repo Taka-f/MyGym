@@ -14,7 +14,14 @@
         = @gym.number
       p.gym-desc
         = @gym.address
-
+.row
+  .col-md-12
+    .reviews
+      h1 口コミ
+      = render @gym.reviews
+      div
+        = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom"
+    br
     = link_to "戻る", root_path
 .links.btn-group
   - if user_signed_in?
