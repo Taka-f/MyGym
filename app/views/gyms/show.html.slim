@@ -1,17 +1,24 @@
-h2
-  = @gym.name
-p 
-  = @gym.description
-h4
-  = @gym.area.name
-p
-  = @gym.number
-p
-  = @gym.address
+.row
+  .col-md-6
+    = image_tag @gym.picture.url, class: "gym-show"
+  
+  .col-md-6
+    .gym-info
+      h2.gym-name
+        = @gym.name
+      p.gym-desc
+        = @gym.description
+      h4.gym-desc
+        = @gym.area.name
+      p.gym-desc
+        = @gym.number
+      p.gym-desc
+        = @gym.address
 
+    = link_to "戻る", root_path
 .links.btn-group
-  = link_to "戻る", root_path
   - if user_signed_in?
-    - if @gym.user_id == current_user.id
-      = link_to "編集", edit_gym_path(@gym)
-      = link_to "削除", gym_path(@gym), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }
+  - if @gym.user_id == current_user.id
+    = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
+    = link_to "削除", gym_path(@gym), method: :delete,
+    data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
