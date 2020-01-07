@@ -1,6 +1,7 @@
 class Gym < ApplicationRecord
   belongs_to :user
   belongs_to :area
+  has_many :reviews
   mount_uploader :picture, PictureUploader
   validate :picture_size
 

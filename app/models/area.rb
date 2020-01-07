@@ -1,3 +1,3 @@
 class Area < ApplicationRecord
-  has_many :area
+  has_many :gyms
 end
