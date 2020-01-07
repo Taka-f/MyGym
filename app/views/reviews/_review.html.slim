@@ -3,3 +3,10 @@
     = review.rating
   p.review-comment
     = review.comment
+
+  - if user_signed_in?
+    - if review.user_id == current_user.id
+      .links.btn-group
+        = link_to "編集", edit_gym_review_path(review.gym, review), class: "btn btn-custom"
+        = link_to "削除", gym_review_path(review.gym, review), method: :delete,
+        data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"

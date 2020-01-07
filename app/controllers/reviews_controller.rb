@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :find_gym
-  
+  before_action :find_review, only: [:edit, :update, :destroy]
+
   def new
     @review = Review.new
   end
@@ -17,6 +18,22 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @review.update(review_params)
+      redirect_to gym_path(@gym)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @review.destroy
+    redirect_to gym_path(@gym)
+  end
+
   private
   
     def review_params
@@ -25,6 +42,10 @@ class ReviewsController < ApplicationController
 
     def find_gym
       @gym = Gym.find(params[:gym_id])
+    end
+
+    def find_review
+      @review = Review.find(params[:id])
     end
 
 end
