@@ -6,8 +6,10 @@ h1.current-area
   .row
     - @gyms.each do |gym|
       .col-md-3
-        a href="/gyms/#{gym.id}"
-          = image_tag gym.picture.url, class: "gym"
-        h3
-          = link_to gym.name, gym_path(gym)
+        .thumbnail
+          a href="/gyms/#{gym.id}"
+            = image_tag gym.picture.url, class: "gym"
+          .caption
+            h5
+              = link_to gym.name, gym_path(gym)
 

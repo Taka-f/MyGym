@@ -16,9 +16,11 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- .gym {
-   height: 200px;
-   width: 300px;
+ .thumbnail {
+   .gym {
+     height: 175px;
+     width: 255px;
+   }
  }
 
  .gym-show {
