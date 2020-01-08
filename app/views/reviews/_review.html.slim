@@ -1,6 +1,5 @@
 .review
-  p
-    = review.rating
+  .review-rating data-score="#{review.rating}"
   p.review-comment
     = review.comment
 

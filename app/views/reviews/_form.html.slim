@@ -1,6 +1,11 @@
 = simple_form_for([@gym, @gym.reviews.build]) do |f|
   #rating-form
-    = f.input :rating, label: "口コミ"
-
+    label レビュー　
   = f.input :comment, label: "コメント"
   = f.button :submit, "投稿", class: "btn-custom2"
+
+javascript:
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });

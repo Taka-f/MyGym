@@ -29,3 +29,12 @@
     = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
     = link_to "削除", gym_path(@gym), method: :delete,
     data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
+
+javascript:
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
