@@ -6,6 +6,13 @@
     .gym-info
       h2.gym-name
         = @gym.name
+      
+      .average-review-rating data-score="#{@average_review}"
+      span.number-of-reviews
+        = @gym.reviews.count
+        | 件のレビュー
+
+      h4 詳細情報
       p.gym-desc
         = @gym.description
       h4.gym-desc
@@ -25,10 +32,10 @@
     = link_to "戻る", root_path
 .links.btn-group
   - if user_signed_in?
-  - if @gym.user_id == current_user.id
-    = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
-    = link_to "削除", gym_path(@gym), method: :delete,
-    data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
+    - if @gym.user_id == current_user.id
+      = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
+      = link_to "削除", gym_path(@gym), method: :delete,
+      data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
 
 javascript:
   $('.review-rating').raty({
@@ -37,4 +44,13 @@ javascript:
       return $(this).attr('data-score');
     },
     path: '/assets/'
+  });
+
+javascript:
+  $('.average-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
   });

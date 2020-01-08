@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :find_gym
   before_action :find_review, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit]
+
 
   def new
     @review = Review.new
