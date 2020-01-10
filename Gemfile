@@ -39,6 +39,7 @@ gem 'bootstrap-sass'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'carrierwave', '1.2.2'
 gem 'mini_magick', '4.7.0'
+gem 'rails_autolink'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
