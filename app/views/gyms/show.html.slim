@@ -21,8 +21,14 @@
         = @gym.number
       p.gym-desc
         = @gym.address
+      = content_tag(:iframe,
+      'map', 
+      src:'https://www.google.com/maps/embed/v1/place?key=AIzaSyDwmb8syeLHQ6w-dIc9EqtNZaWFPG5scQ8&q=' + @gym.address,
+      width: '100%',
+      height: 320,
+      frameborder: 0)
 .row
-  .col-md-12
+  .col-md-6
     .reviews
       h2 口コミ
       = render @gym.reviews

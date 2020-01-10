@@ -63,4 +63,5 @@ class GymsController < ApplicationController
   def find_gym
     @gym = Gym.find(params[:id])
   end
+  
 end

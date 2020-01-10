@@ -1,7 +1,7 @@
 = simple_form_for([@gym, @gym.reviews.build]) do |f|
   #rating-form
     label レビュー　
-  = f.input :comment, label: "コメント"
+  = f.input :comment, label: "コメント", input_html: { rows: 5 }
   = f.button :submit, "投稿", class: "btn-custom2"
 
 javascript:
