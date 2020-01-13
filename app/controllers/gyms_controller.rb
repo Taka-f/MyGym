@@ -4,10 +4,10 @@ class GymsController < ApplicationController
   
   def index
     if params[:area].blank?
-      @gyms = Gym.all.order("created_at DESC")
+      @gyms = Gym.all.order("created_at DESC").page(params[:page]).per(4)
     else
       @area_id = Area.find_by(name: params[:area]).id
-      @gyms = Gym.where(area_id: @area_id).order("created_at DESC")
+      @gyms = Gym.where(area_id: @area_id).order("created_at DESC").page(params[:page]).per(4)
     end
   end
 
@@ -21,7 +21,7 @@ class GymsController < ApplicationController
 
   def new
     @gym = current_user.gyms.build
-    @areas = Area.all.map{ |a| [a.name, a.id] }
+    @areas = Area.all
   end
 
   def create
@@ -29,35 +29,40 @@ class GymsController < ApplicationController
     @gym.area_id = params[:area_id]
 
     if @gym.save
-      redirect_to root_path
+      flash[:notice] = "#{@gym.name}を投稿しました"
+      redirect_to @gym
     else
+      flash[:error_messages] = @gym.errors.full_messages
       render 'new'
     end
   end
 
   def edit
-    @areas = Area.all.map{ |a| [a.name, a.id] }
+    # @areas = Area.all.map{ |a| [a.name, a.id] }
   end
 
   def update
     @gym.area_id = params[:area_id]
 
     if @gym.update(gym_params)
-      redirect_to gym_path(@gym)
+      flash[:notice] = "#{@gym.name}の投稿を編集しました"
+      redirect_to @gym
     else
+      flash[:error_messages] = @gym.errors.full_messages
       render 'edit'
     end
   end
 
   def destroy
     @gym.destroy
+    flash[:notice] = "#{@gym.name}の投稿を削除しました"
     redirect_to root_path
   end 
 
   private
 
   def gym_params
-    params.require(:gym).permit(:name, :description, :number, :address, :area_id, :picture, :time, :url)
+    params.require(:gym).permit(:name, :description, :number, :address, :area_id, :picture, :time, :url, :area_id)
   end
 
   def find_gym

@@ -35,11 +35,14 @@ gem 'jquery-rails'
 gem 'slim-rails'
 gem 'html2slim'
 gem 'simple_form'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0'
+gem 'mini_racer'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'carrierwave', '1.2.2'
 gem 'mini_magick', '4.7.0'
 gem 'rails_autolink'
+gem 'kaminari'
+gem 'rails-i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,6 +59,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'annotate'
 end
 
 group :production do

@@ -1,5 +1,7 @@
 .col-md-10.col-md-offset-1
   .edit-review-form
+    = render 'shared/error_messages'
+
     h1 口コミを編集
     = simple_form_for([@gym, @review]) do |f|
       #rating-form
@@ -7,6 +9,7 @@
 
       = f.input :comment, label: "コメント", input_html: { rows: 5 }
       = f.button :submit, "投稿", class: "btn-custom2"
+      = link_to "戻る", root_path, class: "btn btn-custom"
 
 javascript:
     $('#rating-form').raty({

@@ -14,8 +14,10 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
 
     if @review.save
-      redirect_to gym_path(@gym)
+      flash[:notice] = 'レビューを投稿しました'
+      redirect_to @gym
     else
+      flash[:error_messages] = @review.errors.full_messages
       render 'new'
     end
   end
@@ -25,15 +27,17 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      redirect_to gym_path(@gym)
+      redirect_to @gym
     else
+      flash[:error_messages] = @review.errors.full_messages
       render 'edit'
     end
   end
 
   def destroy
     @review.destroy
-    redirect_to gym_path(@gym)
+    flash[:notice] = 'レビューを削除しました'
+    redirect_to @gym
   end
 
   private

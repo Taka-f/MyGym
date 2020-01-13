@@ -7,38 +7,36 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    nav.navbar.navbar-inverse
+    nav.app-title.navbar.navbar-expand-lg.navbar-dark.bg-dark
       .container
-        .navbar-header
+        .navbar-brand
           = link_to "GymMap", root_path, class: "navbar-brand"
+        button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          span.navbar-toggler-icon
+
+        .collapse.navbar-collapse id="navbarSupportedContent"
+          ul.navbar-nav.mr-auto
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                | エリア
+                span.caret
+              
+              .dropdown-menu aria-labelledby='navbarDropdown'
+                - Area.all.each do |area|
+                  a class="#{'active' if params[:area] == area.name}"
+                    = link_to area.name, gyms_path(area: area.name), class: 'dropdown-item'
+          ul.navbar-nav.mrl-auto
+            - if user_signed_in?
+              li.nav-item = link_to 'ジムを投稿', new_gym_path, class: 'nav-link'
+              li.nav-item = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'    
+            - else
+              li.nav-item = link_to '新規登録', new_user_registration_path, class: 'nav-link'
+              li.nav-item = link_to 'ログイン', new_user_session_path, class: 'nav-link'
+
         
-        ul.nav.navbar-nav.navbar-right
-          - if user_signed_in?
-            li
-              = link_to "ログアウト", destroy_user_session_path, method: :delete
-          - else
-            li
-              = link_to "新規登録", new_user_registration_path
-            li
-              = link_to "ログイン", new_user_session_path
 
-        ul.nav.navbar-nav
-          li.dropdown
-            a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
-              | エリア
-              span.caret
-            
-            ul.dropdown-menu role="menu"
-              - Area.all.each do |area|
-                li class="#{'active' if params[:area] == area.name}"
-                  = link_to area.name, gyms_path(area: area.name), class: "link"
-          - if user_signed_in?
-            li
-              = link_to "ジムを投稿", new_gym_path
-
-    p.notice
-      = notice
-    p.alert
-      = alert
     .container
+      - if flash[:notice]
+        .alert.alert-primary
+          = flash[:notice]
       = yield

@@ -1,15 +1,19 @@
+= render 'shared/error_messages'
+
 = simple_form_for @gym do |f|
-  = select_tag(:area_id, options_for_select(@areas), prompt: "エリアを選択")
-  = f.input :name, label: "店名"
-  = f.label :picture, "写真"
+  = select_tag(:area_id, options_from_collection_for_select(Area.all, :id, :name), prompt: "エリアを選択")
+  br
+  = f.label :picture, '写真'
+  br
   = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'
+  = f.input :name, label: "店名"
   = f.input :address, label: "住所"
   = f.input :time, label: "営業時間"
   = f.input :number, label: "電話番号"
   = f.input :url, label: "URL"
   = f.input :description, label: "詳細", input_html: { rows: 5 }
   = f.button :submit, "投稿"
-
+  = link_to "戻る", root_path, class: "btn btn-custom"
 javascript:
   | $('#gym_picture').bind('change', function() {
     | var size_in_megabytes = this.files[0].size/1024/1024;

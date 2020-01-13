@@ -11,21 +11,29 @@
         | 件のレビュー
   
   .col-md-6
-
-    h3 店舗情報
-    h4.gym-desc
-      = @gym.area.name
-    p.gym-desc
-      = @gym.description
-    p.gym-desc
-      = @gym.time
-    p.gym-desc
-      = @gym.number
-    p.gym-desc
-      = auto_link(@gym.url, :html => { :target => '_blank' })
-    p.gym-desc
-      = @gym.address
-    = content_tag(:iframe,
+    h4 店舗情報
+    table.table
+      tbody
+        tr
+          th.gym-desc エリア
+          td= @gym.area.name
+        tr
+          th.gym-desc 詳細
+          td= simple_format(@gym.description)
+        tr
+          th.gym-desc 営業時間
+          td= @gym.time
+        tr
+          th.gym-desc 電話番号
+          td= @gym.number
+        tr
+          th.gym-desc URL
+          td= auto_link(@gym.url, :html => { :target => '_blank' })
+        tr
+          th.gym-desc 住所
+          td= @gym.address
+        
+    td= content_tag(:iframe,
     'map', 
     src:'https://www.google.com/maps/embed/v1/place?key=AIzaSyDwmb8syeLHQ6w-dIc9EqtNZaWFPG5scQ8&q=' + @gym.address,
     width: '100%',
@@ -38,14 +46,15 @@
       = render @gym.reviews
       div
         = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom"
-    br
-    = link_to "戻る", root_path
-.links.btn-group
-  - if user_signed_in?
-    - if @gym.user_id == current_user.id
-      = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
-      = link_to "削除", gym_path(@gym), method: :delete,
-      data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
+    
+    .links.btn-group
+      - if user_signed_in?
+        - if @gym.user_id == current_user.id
+          = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
+          = link_to "削除", gym_path(@gym), method: :delete,
+          data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
+
+  = link_to "戻る", root_path, class: "btn btn-custom"
 
 javascript:
   $('.review-rating').raty({

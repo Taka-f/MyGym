@@ -3,13 +3,4 @@
 
     h1 投稿内容を編集
 
-    = simple_form_for @gym, html: {multipart: true} do |f|
-      = f.select :area_id, @areas
-      = f.input :name, label: "店名"
-      = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'
-      = f.input :address, label: "住所"
-      = f.input :time, label: "営業時間"
-      = f.input :number, label: "電話番号"
-      = f.input :url, label: "URL"
-      = f.input :description, label: "詳細"
-      = f.button :submit, "投稿"
+    = render 'form'
