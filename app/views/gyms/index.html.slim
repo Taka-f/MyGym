@@ -5,10 +5,10 @@ h1.current-area
 - else
   .row
     - @gyms.each do |gym|
-      .col-md-3.col-sm-6.col-offset-1
-        .card style="width: 16rem;"
+      .col-lg-3.col-md-4.col-sm-6.col-6
+        .card style="width: auto;"
           a href="/gyms/#{gym.id}"
-            = image_tag gym.picture.url, class: "gym"
+            = image_tag gym.picture.url, class: "card-img-top rounded" , width: 'auto', height: 170
           .card-body
             h6.card-title = link_to gym.name, gym
             h6 = gym.area.name

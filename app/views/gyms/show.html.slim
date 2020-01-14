@@ -1,6 +1,6 @@
 .row
-  .col-md-6.col-sm-12
-    = image_tag @gym.picture.url, class: "gym-show"
+  .col-lg-6
+    = image_tag @gym.picture.url, class: "rounded", width: '100%', height: 325
     .gym-info
       h2.gym-name
         = @gym.name
@@ -11,7 +11,7 @@
         = @gym.reviews.count
         | 件のレビュー
   
-  .col-md-6.col-sm-12
+  .col-lg-6
     h4 店舗情報
     table.table
       tbody
