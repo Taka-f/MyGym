@@ -1,6 +1,7 @@
 class GymsController < ApplicationController
   before_action :find_gym, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit]
+  before_action :areas, only: [:new, :create, :edit, :update]
   
   def index
     if params[:area].blank?
@@ -21,7 +22,6 @@ class GymsController < ApplicationController
 
   def new
     @gym = current_user.gyms.build
-    @areas = Area.all
   end
 
   def create
@@ -38,7 +38,6 @@ class GymsController < ApplicationController
   end
 
   def edit
-    # @areas = Area.all.map{ |a| [a.name, a.id] }
   end
 
   def update
@@ -69,4 +68,8 @@ class GymsController < ApplicationController
     @gym = Gym.find(params[:id])
   end
   
+  def areas
+    @areas = Area.all.map{ |a| [a.name, a.id] }
+  end
+
 end

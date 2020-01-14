@@ -1,5 +1,7 @@
 .review
+  = review.rating.to_f
   .review-rating data-score="#{review.rating}"
+  
   = review.created_at.strftime('%Y. %m. %d')
   p.review-comment
     = simple_format(review.comment)

@@ -12,10 +12,11 @@ h1.current-area
           .card-body
             h6.card-title = link_to gym.name, gym
             h6 = gym.area.name
-            .average-review-rating data-score="#{gym.reviews.average(:rating)}"
-            span.number-of-reviews
-            = gym.reviews.count
-            | 件のレビュー
+            a.average-review-rating data-score="#{gym.reviews.average(:rating)}"
+            = gym.reviews.average(:rating)
+            .number-of-reviews
+              = gym.reviews.count
+              | 件のレビュー
 
 = paginate @gyms
 

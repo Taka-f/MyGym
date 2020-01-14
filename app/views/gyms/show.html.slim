@@ -1,16 +1,17 @@
 .row
-  .col-md-6
+  .col-md-6.col-sm-12
     = image_tag @gym.picture.url, class: "gym-show"
     .gym-info
       h2.gym-name
         = @gym.name
       
-      .average-review-rating data-score="#{@average_review}"
-      span.number-of-reviews
+      a.average-review-rating data-score="#{@average_review}"
+      = @gym.reviews.average(:rating)
+      .number-of-reviews
         = @gym.reviews.count
         | 件のレビュー
   
-  .col-md-6
+  .col-md-6.col-sm-12
     h4 店舗情報
     table.table
       tbody
