@@ -4,12 +4,15 @@ class GymsController < ApplicationController
   before_action :areas, only: [:new, :create, :edit, :update]
   
   def index
-    if params[:area].blank?
-      @gyms = Gym.all.order("created_at DESC").page(params[:page]).per(4)
-    else
-      @area_id = Area.find_by(name: params[:area]).id
-      @gyms = Gym.where(area_id: @area_id).order("created_at DESC").page(params[:page]).per(4)
-    end
+    @q = Gym.ransack(params[:q])
+    @areas = Area.all
+    @tags = Tag.all
+    @gyms = @q.result(distinct: true).includes(:area).page(params[:page]).per(4)
+  end
+
+  def search
+    @q = Gym.ransack(params[:q])
+    @gyms = @q.result(distinct: true).includes(:area).page(params[:page]).per(4)
   end
 
   def show
@@ -61,7 +64,7 @@ class GymsController < ApplicationController
   private
 
   def gym_params
-    params.require(:gym).permit(:name, :description, :number, :address, :area_id, :picture, :time, :url, :area_id)
+    params.require(:gym).permit(:name, :description, :number, :address, :area_id, :picture, :time, :url, :area_id, tag_ids: [])
   end
 
   def find_gym

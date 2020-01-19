@@ -19,7 +19,10 @@
 class Gym < ApplicationRecord
   belongs_to :user
   belongs_to :area
-  has_many :reviews
+  has_many :reviews, dependent: :delete_all
+  has_many :gym_tag_relations, dependent: :delete_all
+  has_many :tags, through: :gym_tag_relations
+
   mount_uploader :picture, PictureUploader
   validate :picture_size
   validates :picture, presence: true

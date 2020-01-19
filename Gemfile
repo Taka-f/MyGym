@@ -43,6 +43,7 @@ gem 'mini_magick', '4.7.0'
 gem 'rails_autolink'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,6 +51,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'bullet'
 end
 
 group :development do

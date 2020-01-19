@@ -13,16 +13,13 @@
  */
  @import "bootstrap";
 
- .card {
-   .gym {
-     height: 175px;
-     width: 255px;
-   }
+ .gyms__searchForm {
+   display: inline-block;
  }
 
- .gym-show {
-   height: 325px;
-   width: 460px;
+ .gyms__select {
+   display: inline-block;
+   width: auto;
  }
 
  .row {

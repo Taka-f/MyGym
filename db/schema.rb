@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200110052956) do
+ActiveRecord::Schema.define(version: 20200114130934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20200110052956) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "gym_tag_relations", force: :cascade do |t|
+    t.bigint "gym_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gym_id"], name: "index_gym_tag_relations_on_gym_id"
+    t.index ["tag_id"], name: "index_gym_tag_relations_on_tag_id"
   end
 
   create_table "gyms", force: :cascade do |t|
@@ -44,6 +53,12 @@ ActiveRecord::Schema.define(version: 20200110052956) do
     t.integer "gym_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,4 +71,6 @@ ActiveRecord::Schema.define(version: 20200110052956) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "gym_tag_relations", "gyms"
+  add_foreign_key "gym_tag_relations", "tags"
 end

@@ -10,6 +10,10 @@
       .number-of-reviews
         = @gym.reviews.count
         | 件のレビュー
+
+      - @gym.tags.each do |tag|
+        span.badge.badge-pill.badge-info
+          = tag.name
   
   .col-lg-6.col-md-6
     h4 店舗情報

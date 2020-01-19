@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :gyms do
     resources :reviews
   end
-  root 'gyms#index'
+  root to: 'gyms#index'
+  get 'search', to: 'gyms#search'
 end
