@@ -1,19 +1,20 @@
 .row.justify-content-center
-  .col-md-6.col-md-offset-3
-    .signup-form
-
-      h2
-        = t('.sign_in')
-      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .form-inputs
-          = f.input :email,
-          required: true,
-          autofocus: true,
-          input_html: { autocomplete: "email" }
-          = f.input :password,
-          required: true,
-          input_html: { autocomplete: "current-password" }
-          = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-        .form-actions
-          = f.button :submit, t('.sign_in'), class: "btn btn-custom2"
-      = render "devise/shared/links"
+  .container-login
+    h2
+      = t(".sign_in")
+    - flash.each do |name, msg|
+      .alert.alert-danger
+        a= msg
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-inputs
+        = f.input :email,
+        required: true,
+        autofocus: true,
+        input_html: { autocomplete: "email" }
+        = f.input :password,
+        required: true,
+        input_html: { autocomplete: "current-password" }
+        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+      .form-actions
+        = f.button :submit, t(".sign_in"), class: 'btn btn-primary btn-block'
+    = render "devise/shared/links"

@@ -14,6 +14,7 @@ nav.app-title.navbar.navbar-expand-lg.navbar-dark style="background-color: black
           .dropdown-menu aria-labelledby='navbarDropdown'
             - if user_signed_in?
               = link_to 'ジムを投稿', new_gym_path, class: 'dropdown-item'
+              = link_to 'アカウント編集', edit_user_registration_path, class: 'dropdown-item'
               = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'    
             - else
               = link_to '新規登録', new_user_registration_path, class: 'dropdown-item'

@@ -1,17 +1,5 @@
-/ h1.current-area
-/   = params[:area]
 
 = render 'search_form'
-    / = form_tag gyms_path, method: :get, class: 'gyms__searchForm' do
-    /   = select_tag :tag_id,
-    /   options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
-    /     { prompt: 'こだわりから探す', class: 'form-control gyms__select'}
-    /   = form_tag gyms_path, method: :get, class: 'gyms__searchForm' do
-    /     = select_tag :area_id,
-    /     options_from_collection_for_select(Area.all, :id, :name, params[:area_id]),
-    /       { prompt: 'エリアを選択', class: 'form-control gyms__select'}
-    /     .form-group
-    /       = submit_tag('検索', class: 'btn btn-primary')
 
 .row
   - @gyms.each do |gym|
