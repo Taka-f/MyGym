@@ -9,6 +9,7 @@ html
   body
     = render 'layouts/header'
     .container
+      
       - if flash[:notice]
         .alert.alert-primary
           = flash[:notice]

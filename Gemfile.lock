@@ -85,6 +85,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.0)
+      devise (>= 4.7.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dry-inflector (0.2.0)
@@ -450,6 +452,7 @@ DEPENDENCIES
   carrierwave (= 1.2.2)
   coffee-rails (~> 4.2)
   devise (~> 4.7, >= 4.7.1)
+  devise-i18n
   fog (= 1.42)
   html2slim
   jbuilder (~> 2.5)
