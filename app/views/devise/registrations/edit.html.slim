@@ -21,9 +21,9 @@
         required: true,
         input_html: { autocomplete: "current-password" }
       .form-actions
-        = f.button :submit, t(".update"), class: 'btn btn-primary btn-block'
+        = f.button :submit, t(".update"), class: 'btn btn-outline-primary btn-block'
     
     hr.devise-link.my-5
     .form-group
-      = link_to "トップページ", root_path, class: 'btn btn-info btn-block mb-4'
-      = link_to t(".cancel_my_account"), registration_path(resource_name), data: { confirm: t(".are_you_sure") }, method: :delete, class: 'btn btn-danger btn-block'
+      = link_to "トップページ", root_path, class: 'btn btn-outline-info btn-block mb-4'
+      = link_to t(".cancel_my_account"), registration_path(resource_name), data: { confirm: t(".are_you_sure") }, method: :delete, class: 'btn btn-outline-danger btn-block'
