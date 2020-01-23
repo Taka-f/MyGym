@@ -1,30 +1,37 @@
+.jumbotron
+  .container
+    h1.display-3.text-light My Gym
+    p.text-light We Love Workout.
+    h3.text-light あなたの理想のジムを見つけよう。
+    
+    = render 'search_form'
+.container
+  .row
+    - @gyms.each do |gym|
+      .col-lg-3.col-md-4.col-sm-6.col-6
+        .card.index-card
+          a href="/gyms/#{gym.id}"
+            = image_tag gym.picture.url, class: "card-img-top rounded" , width: 'auto', height: 170
+          .card-body
+            h5.card-title = link_to gym.name, gym, style: 'color: black;'
+            / h6 = gym.area.name
+            .average-review-rating.inline-block data-score="#{gym.reviews.average(:rating)}"
+            .average.inline-block= gym.reviews.average(:rating)
+            .number-of-reviews
+              = gym.reviews.count
+              | 件のレビュー 
+            .area-name.number-of-reviews 
+              = gym.area.name
 
-= render 'search_form'
+  = paginate @gyms
 
-.row
-  - @gyms.each do |gym|
-    .col-lg-3.col-md-4.col-sm-6.col-6
-      .card style="width: auto;"
-        a href="/gyms/#{gym.id}"
-          = image_tag gym.picture.url, class: "card-img-top rounded" , width: 'auto', height: 170
-        .card-body
-          h6.card-title = link_to gym.name, gym
-          h6 = gym.area.name
-          a.average-review-rating data-score="#{gym.reviews.average(:rating)}"
-          = gym.reviews.average(:rating)
-          .number-of-reviews
-            = gym.reviews.count
-            | 件のレビュー
-
-= paginate @gyms
-
-javascript:
-  $('.average-review-rating').raty({
-    size: 20,
-    readOnly: true,
-    path: '/assets/',
-    score: function() {
-      return $(this).attr('data-score')
-    }
-  });
+  javascript:
+    $('.average-review-rating').raty({
+      size: 20,
+      readOnly: true,
+      path: '/assets/',
+      score: function() {
+        return $(this).attr('data-score')
+      }
+    });
 

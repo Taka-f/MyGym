@@ -26,3 +26,49 @@
  .alert-alert {
    @extend .alert-danger;
  }
+ .navbar {
+   padding: .2rem;
+  }
+//  .navbar-nav li {
+//    padding-right: 20px;
+//   }
+
+ .nav-link {
+   font-size: 1.1em !important;
+   margin-right: 10px;
+ }
+ .jumbotron {
+   padding-top: 100px;
+   padding-bottom: 80px;
+   background: image_url("header.jpeg");
+   background-size: cover;
+   background-position: 50% 50%;
+   .display-3 {
+     text-shadow: 1px 1px 15px #000;
+   } h3 {
+    text-shadow: 1px 1px 10px #000;
+   }
+   button {
+     margin-top: 20px;
+     margin-left: 20px;
+   }
+ }
+
+.index-card {
+  .card-body {
+    padding-bottom: 10px;
+    .inline-block {
+      display: inline-block;
+    }
+    .average {
+      padding-left: .8rem;
+    }
+    .number-of-reviews {
+      display: inline-block;
+    }
+    .area-name {
+      padding-left: 1rem;
+    }
+  }
+}
+ 

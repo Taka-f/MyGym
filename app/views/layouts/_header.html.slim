@@ -1,21 +1,17 @@
-nav.navbar.navbar-expand-md.navbar-dark style="background-color: black;"
-  .container
+nav.navbar.navbar-expand-md.navbar-light.sticky-top style="background-color: #ffffff;"
+  .container-fluid
     .navbar-brand
-      = link_to "GymMap", root_path, class: "navbar-brand"
-    button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      = link_to image_tag("logo.png"), root_path, class: "navbar-brand"
+    button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
       span.navbar-toggler-icon
 
-    .collapse.navbar-collapse id="navbarSupportedContent"
-      
-      ul.navbar-nav.mr-right
-        li.nav-item.dropdown
-          a.nav-link.dropdown-toggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            | ユーザー
-          .dropdown-menu aria-labelledby='navbarDropdown'
-            - if user_signed_in?
-              = link_to 'ジムを投稿', new_gym_path, class: 'dropdown-item'
-              = link_to 'アカウント編集', edit_user_registration_path, class: 'dropdown-item'
-              = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'    
-            - else
-              = link_to '新規登録', new_user_registration_path, class: 'dropdown-item'
-              = link_to 'ログイン', new_user_session_path, class: 'dropdown-item'
+    .collapse.navbar-collapse id="navbarResponsive"
+      ul.navbar-nav.ml-auto
+        li.nav-item
+        - if user_signed_in?
+          = link_to 'ジムを投稿', new_gym_path, class: 'nav-link'
+          = link_to 'アカウント編集', edit_user_registration_path, class: 'nav-link'
+          = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'    
+        - else         
+          = link_to '新規登録', new_user_registration_path, class: 'nav-link'
+          = link_to 'ログイン', new_user_session_path, class: 'nav-link'
