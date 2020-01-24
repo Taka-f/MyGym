@@ -7,7 +7,14 @@ class GymsController < ApplicationController
     @q = Gym.ransack(params[:q])
     @areas = Area.all
     @tags = Tag.all
-    @gyms = @q.result(distinct: true).includes(:area).page(params[:page]).per(4)
+    @gyms = @q.result(distinct: true).includes(:area).order("created_at DESC").page(params[:page]).per(4)
+
+    @all_ranks = Gym.includes(:area).find(Review.group(:gym_id).order('count(gym_id) DESC').limit(4).pluck(:gym_id))
+
+    # @average_review = @gyms
+    
+    # @ranks = Gym.all.average_rating
+    # @all_ranks = @ranks.sort_by { |gym| gym.average }
   end
 
   def search

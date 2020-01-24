@@ -28,6 +28,11 @@ class Gym < ApplicationRecord
   validates :picture, presence: true
   validates :name, presence: true
   validates :address, presence: true
+
+  attr_accessor :rating
+  def self.average_rating
+    Gym.reviews.average(:rating)
+  end
 private
 
   def picture_size
@@ -35,4 +40,6 @@ private
       errors.add(:picture, "5MB以上の画像は添付できません")
     end
   end
+
+  
 end

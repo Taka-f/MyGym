@@ -56,12 +56,16 @@
 
 .index-card {
   .card-body {
-    padding-bottom: 10px;
+    padding: 10px;
+    .card-title {
+      display: block;
+      height: 30px;
+    }
     .inline-block {
       display: inline-block;
     }
     .average {
-      padding-left: .8rem;
+      padding-left: .2rem;
     }
     .number-of-reviews {
       display: inline-block;
