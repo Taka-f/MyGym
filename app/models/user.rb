@@ -15,8 +15,13 @@
 class User < ApplicationRecord
   has_many :gyms
   has_many :reviews
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :likes
+  has_many :liked_gyms, through: :likes, source: :gym
+
+  def already_liked?(gym)
+    self.likes.exists?(gym_id: gym.id)
+  end
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
 end

@@ -1,17 +1,17 @@
 
  @import "bootstrap";
 
- .gyms__searchForm {
-   display: inline-block;
+ body {
+   font-family: 'Arial Rounded MT Bold','Trebuchet MS','ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN','ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
+   background-color: #f7f7f7;
  }
-
- .gyms__select {
-   display: inline-block;
-   width: auto;
+ .top-page h3 {
+   margin-top: 30px;
  }
+ 
 
- .row {
-   margin-top: 10px;
+ .gym-info {
+   margin-top: 50px;
  }
 
  .container-login {
@@ -44,7 +44,7 @@
    background-size: cover;
    background-position: 50% 50%;
    .display-3 {
-     text-shadow: 1px 1px 15px #000;
+     text-shadow: 1px 1px 10px #000;
    } h3 {
     text-shadow: 1px 1px 10px #000;
    }
@@ -55,6 +55,9 @@
  }
 
 .index-card {
+  margin-bottom: 30px;
+  margin-left: 15px;
+  box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
   .card-body {
     padding: 10px;
     .card-title {
@@ -75,4 +78,9 @@
     }
   }
 }
- 
+
+.like-btn-unlike {
+  color: red;
+  size: 30px;
+}
+

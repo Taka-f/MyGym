@@ -2,56 +2,24 @@
   .container
     h1.display-3.text-light My Gym
     p.text-light We Love Workout.
-    h3.text-light あなたの理想のジムを見つけよう。
-    
+    h3.text-light あなたの理想のジムを見つけよう。   
     = render 'search_form'
+
 .container
-  h3 #新着
-  .row
-    - @gyms.each do |gym|
-      .col-lg-3.col-md-4.col-sm-6.col-6
-        .card.index-card
-          a href="/gyms/#{gym.id}"
-            = image_tag gym.picture.url, class: "card-img-top rounded" , width: 'auto', height: 170
-          .card-body
-            h6.card-title = link_to gym.name, gym, style: 'color: black;'
-            / h6 = gym.area.name
-            .average-review-rating.inline-block data-score="#{gym.reviews.average(:rating)}"
-            .average.inline-block= gym.reviews.average(:rating)
-            .number-of-reviews
-              = gym.reviews.count
-              | 件のレビュー 
-              .area-name.number-of-reviews 
-                = gym.area.name
+  .top-page
+    h3 #新着
+    .row.justify-content-center
+      - @gyms.each do |gym|
+        = render partial: 'card', locals: { gym: gym }
+    = paginate @gyms
 
-  = paginate @gyms
-.container
-  h3 #レビューの多いジム
-  .row
-    - @all_ranks.each.with_index(1) do |gym, i|
-      .col-lg-3.col-md-4.col-sm-6.col-6
-        .card.index-card
-          a href="/gyms/#{gym.id}"
-            = image_tag gym.picture.url, class: "card-img-top rounded" , width: 'auto', height: 170
-          .card-body
-            h6.card-title = link_to gym.name, gym, style: 'color: black;'
-            / h6 = gym.area.name
-            .average-review-rating.inline-block data-score="#{gym.reviews.average(:rating)}"
-            .average.inline-block= gym.reviews.average(:rating)
-            .number-of-reviews
-              = gym.reviews.count
-              | 件のレビュー 
-              .area-name.number-of-reviews 
-                = gym.area.name
+    h3 #人気なジム
+    .row.justify-content-center
+      - @like_ranks.each do |gym|
+        = render partial: 'card', locals: { gym: gym }
 
-
-  javascript:
-    $('.average-review-rating').raty({
-      size: 20,
-      readOnly: true,
-      path: '/assets/',
-      score: function() {
-        return $(this).attr('data-score')
-      }
-    });
+    h3 #レビューの多いジム
+    .row.justify-content-center
+      - @review_ranks.each do |gym|
+        = render partial: 'card', locals: { gym: gym }
 

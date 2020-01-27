@@ -9,12 +9,8 @@ class GymsController < ApplicationController
     @tags = Tag.all
     @gyms = @q.result(distinct: true).includes(:area).order("created_at DESC").page(params[:page]).per(4)
 
-    @all_ranks = Gym.includes(:area).find(Review.group(:gym_id).order('count(gym_id) DESC').limit(4).pluck(:gym_id))
-
-    # @average_review = @gyms
-    
-    # @ranks = Gym.all.average_rating
-    # @all_ranks = @ranks.sort_by { |gym| gym.average }
+    @like_ranks = Gym.create_like_ranks
+    @review_ranks = Gym.create_review_ranks
   end
 
   def search
@@ -37,7 +33,6 @@ class GymsController < ApplicationController
   def create
     @gym = current_user.gyms.build(gym_params)
     @gym.area_id = params[:area_id]
-
     if @gym.save
       flash[:notice] = "#{@gym.name}を投稿しました"
       redirect_to @gym

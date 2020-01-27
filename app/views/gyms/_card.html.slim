@@ -1,0 +1,30 @@
+.col-lg-3.col-md-5
+  .card.index-card
+    a href="/gyms/#{gym.id}"
+      = image_tag gym.picture.url, class: "card-img-top rounded" , width: 'auto', height: 170
+    .card-body
+      h6.card-title = link_to gym.name, gym, style: 'color: black;'
+      .like
+        i.fa.fa-heart.like-btn-unlike
+        = gym.likes_count
+      .average-review-rating.inline-block data-score="#{gym.reviews.average(:rating)}"
+      .average.inline-block
+        | (
+        = gym.reviews.average(:rating)
+        | )
+      .number-of-reviews
+        = gym.reviews.count
+        | 件のレビュー 
+        .area-name.number-of-reviews
+          = gym.area.name
+
+
+javascript:
+  $('.average-review-rating').raty({
+    size: 20,
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });

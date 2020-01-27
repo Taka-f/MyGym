@@ -5,6 +5,7 @@
 #  id          :bigint           not null, primary key
 #  address     :string
 #  description :text
+#  likes_count :integer
 #  name        :string
 #  number      :string
 #  picture     :string

@@ -5,6 +5,7 @@
 #  id          :bigint           not null, primary key
 #  address     :string
 #  description :text
+#  likes_count :integer
 #  name        :string
 #  number      :string
 #  picture     :string
@@ -22,6 +23,12 @@ class Gym < ApplicationRecord
   has_many :reviews, dependent: :delete_all
   has_many :gym_tag_relations, dependent: :delete_all
   has_many :tags, through: :gym_tag_relations
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
+
+  # def like_user(user_id)
+  #   likes.find_by(user_id: user_id)
+  # end
 
   mount_uploader :picture, PictureUploader
   validate :picture_size
@@ -29,9 +36,12 @@ class Gym < ApplicationRecord
   validates :name, presence: true
   validates :address, presence: true
 
-  attr_accessor :rating
-  def self.average_rating
-    Gym.reviews.average(:rating)
+  def self.create_like_ranks
+    Gym.includes(:area).find(Like.group(:gym_id).order('count(gym_id) desc').limit(4).pluck(:gym_id))
+  end
+
+  def self.create_review_ranks
+    Gym.includes(:area).find(Review.group(:gym_id).order('count(gym_id) desc').limit(4).pluck(:gym_id))
   end
 private
 

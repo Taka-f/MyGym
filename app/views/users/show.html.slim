@@ -1,0 +1,8 @@
+h1 ユーザー詳細
+h3
+  = @user.name
+h3 お気に入りのジム
+- @user.liked_gyms.each do |gym|
+  = gym.user.name
+
+= link_to "トップページへ戻る", gyms_path
