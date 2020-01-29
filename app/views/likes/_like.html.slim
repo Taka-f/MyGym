@@ -3,22 +3,17 @@
   - if current_user.already_liked?(@gym)
     .like_off
       = link_to gym_like_path(gym_id: gym.id, id: gym.likes[0].id), method: :delete, remote: true do
-        i.fa.fa-heart.fa-lg.like-btn-unlike
+        i.fa.fa-heart.fa-lg.fa-fw.like-btn-unlike
         span= gym.likes_count
 
   - else
     .like_on
       = link_to gym_likes_path(gym.id), method: :post, remote: true do
-        i.fa.fa-heart.fa-lg.like-btn
+        i.fa.fa-heart.fa-lg.fa-fw.like-btn
         | お気に入り
         span= gym.likes_count
 
 - else
-  - if gym.likes_count > 0
-    .vertical_like
-      i.fa.fa-heart.like-btn-unlike
-      = gym.likes_count
-  - else
-    .vertical_like
-      i.fa.fa-heart.like-btn
-      = gym.likes_count
+  .like_icon
+    i.fa.fa-heart.fa-lg.fa-fw.like-btn-unlike
+    = gym.likes_count

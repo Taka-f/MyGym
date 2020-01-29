@@ -1,20 +1,22 @@
 # == Schema Information
 #
-# Table name: reviews
+# Table name: goods
 #
 #  id         :bigint           not null, primary key
-#  comment    :text
-#  good_count :integer
-#  rating     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  gym_id     :integer
-#  user_id    :integer
+#  review_id  :bigint
+#  user_id    :bigint
+#
+# Foreign Keys
+#
+#  fk_rails_...  (review_id => reviews.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
 require 'test_helper'
 
-class ReviewTest < ActiveSupport::TestCase
+class GoodTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

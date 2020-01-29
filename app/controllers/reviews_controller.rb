@@ -3,7 +3,6 @@ class ReviewsController < ApplicationController
   before_action :find_review, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit]
 
-
   def new
     @review = Review.new
   end
@@ -12,7 +11,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.gym_id = @gym.id
     @review.user_id = current_user.id
-
+    
     if @review.save
       flash[:notice] = 'レビューを投稿しました'
       redirect_to @gym
@@ -43,7 +42,7 @@ class ReviewsController < ApplicationController
   private
   
     def review_params
-      params.require(:review).permit(:rating, :comment)
+      params.require(:review).permit(:id, :rating, :comment)
     end
 
     def find_gym
@@ -53,5 +52,4 @@ class ReviewsController < ApplicationController
     def find_review
       @review = Review.find(params[:id])
     end
-
 end

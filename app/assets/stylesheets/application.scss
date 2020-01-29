@@ -12,6 +12,22 @@
 
  .gym-info {
    margin-top: 50px;
+   h2.gym-name {
+     margin-top: 10px;
+   }
+   .reviews ul {
+    padding-left: 0;
+    height: 24px;
+    margin-bottom: 10px;
+    li {
+    display: inline-block;
+    
+  }.average {
+    padding-left: 5px;
+  } }
+  .number-of-reviews {
+    display: block;
+  }
  }
 
  .container-login {
@@ -19,20 +35,16 @@
    max-width: 576px;
    padding: 2rem;
  }
- .alert-notice {
-   @extend .alert-info;
- }
+//  .alert-notice {
+//    @extend .alert-info;
+//  }
 
- .alert-alert {
-   @extend .alert-danger;
- }
+//  .alert-alert {
+//    @extend .alert-danger;
+//  }
  .navbar {
    padding: .2rem;
   }
-//  .navbar-nav li {
-//    padding-right: 20px;
-//   }
-
  .nav-link {
    font-size: 1.1em !important;
    margin-right: 10px;
@@ -44,32 +56,43 @@
    background-size: cover;
    background-position: 50% 50%;
    .display-3 {
-     text-shadow: 1px 1px 10px #000;
-   } h3 {
-    text-shadow: 1px 1px 10px #000;
+     text-shadow: 1px 1px 8px #000;
+   } 
+   .sub {
+    padding-left: 1em;
+  }
+   h3 {
+    margin-top: 10px;
+    text-shadow: 1px 1px 5px #000;
+    font-weight: bold;
    }
    button {
      margin-top: 20px;
      margin-left: 20px;
    }
  }
-
+ 
 .index-card {
   margin-bottom: 30px;
   margin-left: 15px;
   box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
+  border-radius: 10px 10px 10px 10px;
+  .card-img-top {
+    border-radius: 10px 10px 0 0;
+  }
   .card-body {
     padding: 10px;
     .card-title {
       display: block;
       height: 30px;
     }
-    .inline-block {
+    .reviews ul {
+      padding-left: 0;
+      li {
+      text-align: left;
       display: inline-block;
-    }
-    .average {
-      padding-left: .2rem;
-    }
+    }}
+    
     .number-of-reviews {
       display: inline-block;
     }
@@ -83,4 +106,6 @@
   color: red;
   size: 30px;
 }
-
+.thumbs-up-blue {
+  color: blue;
+}

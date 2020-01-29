@@ -15,11 +15,16 @@
 class User < ApplicationRecord
   has_many :gyms
   has_many :reviews
+  has_many :goods
   has_many :likes
   has_many :liked_gyms, through: :likes, source: :gym
 
   def already_liked?(gym)
     self.likes.exists?(gym_id: gym.id)
+  end
+
+  def already_good?(review)
+    self.goods.exists?(review_id: review.id)
   end
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

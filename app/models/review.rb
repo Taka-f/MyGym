@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  comment    :text
+#  good_count :integer
 #  rating     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -14,7 +15,12 @@
 class Review < ApplicationRecord
   belongs_to :gym
   belongs_to :user
-
+  has_many :goods
+  has_many :good_users, through: :goods, source: :user
   validates :comment, presence: true
   validates :rating, presence: true
+
+  def good_user(user_id)
+    goods.find_by(user_id: user_id)
+   end
 end

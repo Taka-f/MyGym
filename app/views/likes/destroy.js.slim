@@ -1,5 +1,1 @@
-/ | $('#likes_button_off#{@gym.id}').html("
-/ = j(render partial: 'likes/like', locals: { gym: @gym })
-/ | ");
-
 | $("#likes_buttons_#{@gym.id}").html("#{j(render partial: 'likes/like', locals: { gym: @gym })}");
