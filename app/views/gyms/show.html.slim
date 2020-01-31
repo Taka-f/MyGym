@@ -2,7 +2,9 @@
   .row
     .col-lg-6
       .gym-info
-        = image_tag @gym.picture.url, class: "rounded", width: '100%', height: 380
+        = image_tag @gym.pictures[0].url, class: "rounded", width: '100%', height: 380
+        / - @gym.pictures.each do |picture|
+          = image_tag picture, class: "rounded", width: '100%', height: 380
         h2.gym-name
           = @gym.name
 
@@ -24,6 +26,9 @@
           span.badge.badge-pill.badge-info
             = tag.name
     
+        .pictures
+          - @gym.pictures.each do |picture|
+            = image_tag picture, class: "gym-pictures"
     .col-lg-6
       .gym-info
         h4 店舗情報

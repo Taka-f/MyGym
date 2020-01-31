@@ -1,11 +1,11 @@
 
 = render 'shared/error_messages'
 
-= simple_form_for @gym do |f|
+= simple_form_for @gym, html: { multipart: true } do |f|
   = select_tag(:area_id, options_for_select(@areas), :prompt => "エリアを選択")
   / = f.select :area_id, options_from_collection_for_select(Area.all, :id, :name), prompt: "エリアを選択"
-  = f.input :picture, as: :file, accept: 'image/jpeg,image/gif,image/png'
-  / = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'
+  / = f.input :pictures, multiple: true, as: :file, accept: 'image/jpeg,image/gif,image/png'
+  = f.file_field :pictures, multiple: true, accept: 'image/jpeg,image/gif,image/png'
   = f.input :name, label: "店名"
   = f.input :address, label: "住所"
   = f.input :time, label: "営業時間"
@@ -21,7 +21,7 @@
   = link_to "戻る", root_path, class: "btn btn-custom"
 
 javascript:
-  | $('#gym_picture').bind('change', function() {
+  | $('#gym_pictures').bind('change', function() {
     | var size_in_megabytes = this.files[0].size/1024/1024;
     | if (size_in_megabytes > 5) {
       | alert('5MB以上の画像は添付できません');

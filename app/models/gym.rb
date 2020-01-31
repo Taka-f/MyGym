@@ -8,7 +8,7 @@
 #  likes_count :integer
 #  name        :string
 #  number      :string
-#  picture     :string
+#  pictures    :string
 #  time        :string
 #  url         :string
 #  created_at  :datetime         not null
@@ -26,9 +26,10 @@ class Gym < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
 
-  mount_uploader :picture, PictureUploader
+  mount_uploaders :pictures, PictureUploader
+  serialize :pictures, JSON
   validate :picture_size
-  validates :picture, presence: true
+  validates :pictures, presence: true
   validates :name, presence: true
   validates :address, presence: true
 
@@ -42,8 +43,8 @@ class Gym < ApplicationRecord
 private
 
   def picture_size
-    if picture.size > 5.megabytes
-      errors.add(:picture, "5MB以上の画像は添付できません")
+    if pictures.size > 5.megabytes
+      errors.add(:pictures, "5MB以上の画像は添付できません")
     end
   end
 

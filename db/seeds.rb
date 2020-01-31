@@ -21,3 +21,9 @@ Tag.create([
   { name: '複数店舗利用可'},
   { name: 'カリキュラム有り'}
 ])
+Area.create([
+  { name: '福岡'},
+  { name: '東京'},
+  { name: '大阪'},
+  { name: '名古屋'}
+])

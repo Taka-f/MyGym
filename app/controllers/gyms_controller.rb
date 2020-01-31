@@ -69,7 +69,7 @@ class GymsController < ApplicationController
   private
 
   def gym_params
-    params.require(:gym).permit(:name, :description, :number, :address, :area_id, :picture, :time, :url, :area_id, tag_ids: [])
+    params.require(:gym).permit({pictures: []}, :name, :description, :number, :address, :area_id, :time, :url, :area_id, tag_ids: [])
   end
 
   def find_gym

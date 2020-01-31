@@ -1,7 +1,7 @@
 .col-lg-3.col-md-5
   .card.index-card
     a href="/gyms/#{gym.id}"
-      = image_tag gym.picture.url, class: "card-img-top" , width: 'auto', height: 170
+      = image_tag gym.pictures[0].url, class: "card-img-top" , width: 'auto', height: 170
     .card-body
       h6.card-title = link_to gym.name, gym, style: 'color: black;'
       .like

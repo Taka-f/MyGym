@@ -9,7 +9,7 @@
       = simple_form_for @gym, html: {multipart: true} do |f|
         = f.select :area_id, @areas
         = f.input :name, label: "店名"
-        = f.input :picture, as: :file, accept: 'image/jpeg,image/gif,image/png'
+        = f.file_field :pictures, multiple: true, accept: 'image/jpeg,image/gif,image/png'
         = f.input :address, label: "住所"
         = f.input :time, label: "営業時間"
         = f.input :number, label: "電話番号"

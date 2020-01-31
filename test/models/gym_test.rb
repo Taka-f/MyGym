@@ -8,7 +8,7 @@
 #  likes_count :integer
 #  name        :string
 #  number      :string
-#  picture     :string
+#  pictures    :string
 #  time        :string
 #  url         :string
 #  created_at  :datetime         not null

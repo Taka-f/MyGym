@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200127124718) do
+ActiveRecord::Schema.define(version: 20200131120441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20200127124718) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "area_id"
-    t.string "picture"
+    t.string "pictures"
     t.string "time"
     t.string "url"
     t.integer "likes_count"
@@ -61,19 +61,6 @@ ActiveRecord::Schema.define(version: 20200127124718) do
     t.datetime "updated_at", null: false
     t.index ["gym_id"], name: "index_likes_on_gym_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
-  end
-
-  create_table "locales", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "ja"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_locales_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_locales_on_reset_password_token", unique: true
   end
 
   create_table "reviews", force: :cascade do |t|
