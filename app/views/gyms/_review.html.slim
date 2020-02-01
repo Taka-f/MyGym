@@ -1,19 +1,19 @@
-ul
-  li.average-review-rating data-score="#{gym.reviews.average(:rating)}"
-  li.average
-    | (
-    = gym.reviews.average(:rating)
-    | )
-.number-of-reviews
-  = gym.reviews.count
-  | 件のレビュー 
+/ ul
+/   li.average-review-rating data-score="#{gym.reviews.average(:rating)}"
+/   li.average
+/     | (
+/     = gym.reviews.average(:rating)
+/     | )
+/ .number-of-reviews
+/   = gym.reviews.count
+/   | 件のレビュー 
 
-javascript:
-  $('.average-review-rating').raty({
-    size: 20,
-    readOnly: true,
-    path: '/assets/',
-    score: function() {
-      return $(this).attr('data-score')
-    }
-  });
+/ javascript:
+/   $('.average-review-rating').raty({
+/     size: 20,
+/     readOnly: true,
+/     path: '/assets/',
+/     score: function() {
+/       return $(this).attr('data-score')
+/     }
+/   });

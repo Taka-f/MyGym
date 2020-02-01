@@ -30,7 +30,7 @@
   }
  }
 
- .container-login {
+ .container-form {
    @extend .container-fluid;
    max-width: 576px;
    padding: 2rem;
@@ -109,8 +109,34 @@
 .thumbs-up-blue {
   color: blue;
 }
+#lightbox .lb-container {
+  padding: 1px;
+}
 .gym-pictures {
   display: inline-block;
   width: 100px;
   height: 100px;
+  padding: 2px;
+  // margin: 2px 2px;
+  border-color:#fff;
+  // line-height: 0;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  -ms-border-radius:6px;
+  -o-border-radius:6px;
+  bordr-radius: 6px;
+
+  &:hover {
+    background-color: rgb(8, 105, 250);
+  }
+}
+.slick-dots {
+  li {
+    font-size: 20px !important;
+    button:before {
+      content: "" !important;
+      font-size: 14px !important;
+      color: rgb(60, 60, 60) !important;
+    }
+  }
 }

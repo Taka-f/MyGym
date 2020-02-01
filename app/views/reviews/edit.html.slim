@@ -1,5 +1,5 @@
 .row.justify-content-center
-  .container-login
+  .container-form
     = render 'shared/error_messages'
 
     h1 口コミを編集
@@ -12,7 +12,7 @@
       = link_to "戻る", root_path, class: "btn btn-custom"
 
 javascript:
-    $('#rating-form').raty({
-      path: '/assets/',
-      scoreName: 'review[rating]'
-    });
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });

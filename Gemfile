@@ -46,7 +46,7 @@ gem 'rails-i18n'
 gem 'ransack'
 gem 'devise-i18n'
 gem 'rails-i18n'
-
+gem 'fog-aws'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -67,7 +67,7 @@ group :development do
 end
 
 group :production do
-  gem 'fog',  '1.42'
+  # gem 'fog',  '1.42'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

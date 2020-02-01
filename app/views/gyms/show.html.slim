@@ -2,9 +2,11 @@
   .row
     .col-lg-6
       .gym-info
-        = image_tag @gym.pictures[0].url, class: "rounded", width: '100%', height: 380
-        / - @gym.pictures.each do |picture|
-          = image_tag picture, class: "rounded", width: '100%', height: 380
+        .a.pictures
+          - @gym.pictures.each do |picture|
+            .b
+              = image_tag picture, class: "rounded c", width: '100%', height: 380
+        
         h2.gym-name
           = @gym.name
 
@@ -28,7 +30,9 @@
     
         .pictures
           - @gym.pictures.each do |picture|
-            = image_tag picture, class: "gym-pictures"
+            = link_to picture.url, 'data-lightbox': picture do
+              = image_tag picture, class: "gym-pictures"
+            
     .col-lg-6
       .gym-info
         h4 店舗情報
@@ -85,21 +89,38 @@
         - @like_ranks.each do |gym|
           = render partial: 'card', locals: { gym: gym }
       
-/ javascript:
-/   $('.review-rating').raty({
-/     readOnly: true,
-/     score: function() {
-/       return $(this).attr('data-score');
-/     },
-/     path: '/assets/'
-/   });
+javascript:
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
 
 javascript:
-      $('.average-review-rating').raty({
-        size: 20,
-        readOnly: true,
-        path: '/assets/',
-        score: function() {
-          return $(this).attr('data-score')
-        }
-      });
+  $('.average-review-rating').raty({
+    size: 20,
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+
+javascript:
+  $(function() {
+    $('.a').slick({
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 6000,
+      infinite: true,
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+
+  $('.slick-dots li').on('mouseover', function() {
+    $('.a').slick('goTo', $(this).index());
+    });
+  });
