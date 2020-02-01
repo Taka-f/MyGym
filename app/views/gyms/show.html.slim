@@ -89,14 +89,14 @@
         - @like_ranks.each do |gym|
           = render partial: 'card', locals: { gym: gym }
       
-javascript:
-  $('.review-rating').raty({
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
+/ javascript:
+/   $('.review-rating').raty({
+/     readOnly: true,
+/     score: function() {
+/       return $(this).attr('data-score');
+/     },
+/     path: '/assets/'
+/   });
 
 javascript:
   $('.average-review-rating').raty({

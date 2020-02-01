@@ -20,8 +20,7 @@ class GymsController < ApplicationController
 
   def show
     @like_ranks = Gym.create_like_ranks
-    # @q = Gym.ransack(params[:q])
-    # @gyms = @q.result(distinct: true).includes(:area).order("created_at DESC").page(params[:page]).per(4)
+    
     if @gym.reviews.blank?
       @average_review = 0
     else
