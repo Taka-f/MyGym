@@ -5,14 +5,15 @@
     .card-body
       h6.card-title = link_to gym.name, gym, style: 'color: black;'
       .like
-        i.fa.fa-heart.like-btn-unlike
+        i.fa.fa-heart.like-btn-red.fa-fw
         = gym.likes_count
       .reviews
         ul
           li.average-review-rating data-score="#{gym.reviews.average(:rating)}"
           li.average
             | (
-            = gym.reviews.average(:rating)
+            = gym.rating_average
+            / = gym.reviews.average(:rating).to_i
             | )
       .number-of-reviews
         = gym.reviews.count

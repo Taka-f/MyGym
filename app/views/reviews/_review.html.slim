@@ -1,15 +1,32 @@
 .review
-  .average-review-rating data-score="#{review.rating}"
-  
-  p= review.created_at.strftime('%Y. %m. %d')
-  p.review-comment
+  .review-user
+    - if review.user.image.url.present?
+      = image_tag review.user.image.url
+    - else
+      = image_tag 'no_image.png'
+  .review-profile
+    = review.user.name
+    span= review.created_at.strftime('%Y. %m. %d')
+    .average-review-rating data-score="#{review.rating}"
+
+  .review-comment
     = simple_format(review.comment)
   div id= "good_buttons_#{review.id}"
     = render partial: 'goods/good', locals: { review: review, goods: @goods }
-  - if user_signed_in?
-    - if review.user_id == current_user.id
-      .links.btn-group
-        = link_to "編集", edit_gym_review_path(review.gym, review), class: "btn btn-custom"
-        = link_to "削除", gym_review_path(review.gym, review), method: :delete,
-        data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
-hr.my-5
+  .review-edit
+    - if user_signed_in?
+      - if review.user_id == current_user.id
+        .links.btn-group
+          = link_to "編集", edit_gym_review_path(review.gym, review), class: "btn btn-custom"
+          = link_to "削除", gym_review_path(review.gym, review), method: :delete,
+          data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
+
+javascript:
+  $('.average-review-rating').raty({
+    size: 20,
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });

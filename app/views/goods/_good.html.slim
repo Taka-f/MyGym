@@ -2,19 +2,19 @@
 
   / - if Good.find_by(user_id: current_user.id, review_id: review.id)
   - if current_user.already_good?(review)
-    .good_off
+    .good
       = link_to gym_review_good_path(review.gym, review.id, review.goods[0].id), method: :delete, remote: true do
         i.fa.fa-thumbs-up.fa-fw.fa-lg.thumbs-up-blue
       = review.good_count
 
   - else
-    .good_on
+    .good
       = link_to gym_review_goods_path(review.gym, review.id), method: :post, remote: true do
         | 役に立つ
-        i.fa.fa-thumbs-up.fa-fw.fa-lg
+        i.fa.fa-thumbs-up.fa-fw.fa-lg.thumbs-up-gray
       = review.good_count
 
 - else
-  .vertical_good
+  .good
     i.fa.fa-thumbs-up.fa-fw.fa-lg.thumbs-up-blue
     = review.good_count

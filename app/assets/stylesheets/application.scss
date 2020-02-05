@@ -9,16 +9,17 @@
    margin-top: 30px;
  }
  
-
+// ジムの詳細
  .gym-info {
    margin-top: 50px;
    h2.gym-name {
      margin-top: 10px;
    }
-   .reviews ul {
+   .reviews-gym ul {
     padding-left: 0;
     height: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-top: 10px;
     li {
     display: inline-block;
     
@@ -28,20 +29,29 @@
   .number-of-reviews {
     display: block;
   }
+  .tags {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .badge {
+    padding: 5px;
+    margin: 1px;
+  }
  }
 
+//  フォーム
  .container-form {
    @extend .container-fluid;
    max-width: 576px;
    padding: 2rem;
+   background-color: #fff;
+   margin-top: 5em;
+   margin-bottom: 5em;
+   border-radius: 15px;
+   box-shadow: 1px 1px 5px rgba(87, 87, 87, 0.25);
  }
-//  .alert-notice {
-//    @extend .alert-info;
-//  }
 
-//  .alert-alert {
-//    @extend .alert-danger;
-//  }
+// ナビバー
  .navbar {
    padding: .2rem;
   }
@@ -72,6 +82,7 @@
    }
  }
  
+//  ジムカード
 .index-card {
   margin-bottom: 30px;
   margin-left: 15px;
@@ -88,6 +99,7 @@
     }
     .reviews ul {
       padding-left: 0;
+      margin-bottom: 5px;
       li {
       text-align: left;
       display: inline-block;
@@ -97,39 +109,61 @@
       display: inline-block;
     }
     .area-name {
-      padding-left: 1rem;
+      padding-left: 0.5rem;
+      text-align: right;
     }
   }
 }
 
-.like-btn-unlike {
-  color: red;
-  size: 30px;
+// お気に入りハート
+.like_icon {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  color: #d7ccb6;
+  border: 1px solid #eae6dc;
+  background: #ffffff;
+  cursor: pointer;
+}
+  .like-btn-red {
+    color: red;
+    size: 30px;
+  }
+.like-btn-gray {
+  color: #d7ccb6;
 }
 .thumbs-up-blue {
-  color: blue;
+  color: rgb(64, 107, 250);
+}
+.thumbs-up-gray {
+  color: #d7ccb6;
 }
 #lightbox .lb-container {
   padding: 1px;
 }
-.gym-pictures {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  padding: 2px;
-  // margin: 2px 2px;
-  border-color:#fff;
-  // line-height: 0;
-  -webkit-border-radius:6px;
-  -moz-border-radius:6px;
-  -ms-border-radius:6px;
-  -o-border-radius:6px;
-  bordr-radius: 6px;
 
-  &:hover {
-    background-color: rgb(8, 105, 250);
+// ジムの複数写真
+.pictures {
+  margin-bottom: 3em;
+  .gym-pictures {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    padding: 2px;
+    border-color:#fff;
+    border-radius: 6px;
+  
+    &:hover {
+      background-color: rgb(8, 105, 250);
+    }
   }
 }
+
+// 画像スライド
 .slick-dots {
   li {
     font-size: 20px !important;
@@ -139,4 +173,132 @@
       color: rgb(60, 60, 60) !important;
     }
   }
+}
+// ユーザー写真
+.circle-image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #fff;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// ジム写真
+.gym-images img {
+  width: 150px;
+  height: 150px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: solid 1px rgb(109, 107, 107);
+  object-fit: cover;
+  display: block;
+  margin: 10px;
+}
+
+// レビュー
+.review {
+  border-bottom: solid 1px rgb(220, 220, 221);
+  .review-user {
+    display: inline-block;
+  }
+  
+  .review-user img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+    background-color: #fff;
+  }
+}
+  .review-profile {
+    position:relative;
+    top: 10px;
+    display: inline-block;
+    padding: 10px;
+    span {
+      padding-left: 1em;
+    }
+    .average-review-rating img {
+      margin-top: 5px;
+    }
+    .review-edit {
+      display: inline-block;
+    }
+  }
+  .review-comment p {
+    margin-bottom: 0!important;
+  }
+
+.good {
+  text-align: right;
+  padding-bottom: 10px;
+}
+.profile {
+  p {
+    text-align: center;
+    margin: 10px;
+  }
+  h5 {
+    margin-top: 20px;
+  }
+  .liked_gym img{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 5px;
+    padding: 2px;
+    background-color: #fff;
+    &:hover {
+      background-color: rgb(8, 105, 250);
+    }
+  }
+}
+
+.btn-custom {
+  width: 80px;
+	color: darken(#bdbdbd, 5%);
+	background-color: #fff;
+	border: 1px solid darken(#bdbdbd, 5%);
+	padding: 6px 10px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  margin-right: auto;
+  margin-left: auto;
+	&:hover {
+		text-decoration: none;
+		background-color: darken(#bdbdbd, 5%);
+		color: #fff;
+		transition: 0.5s;
+	}
+}
+
+.btn-custom2 {
+  width: 200px;
+  display: block;
+  text-align: center;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #ffffff;
+  background-image: linear-gradient(-90deg,#6795fd 0%, #5cf5dc 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #5e7fca;
+  margin-right: auto;
+  margin-left: auto;
+  &:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+	}	
+}
+
+.back_home {
+  display: block;
+  margin: 10px 0 0 auto;
 }

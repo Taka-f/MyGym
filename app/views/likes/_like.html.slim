@@ -1,17 +1,17 @@
 - if user_signed_in?
 
   - if current_user.already_liked?(@gym)
-    .like_off
+    .like_icon
       = link_to gym_like_path(gym_id: gym.id, id: gym.likes[0].id), method: :delete, remote: true do
-        i.fa.fa-heart.fa-lg.fa-fw.like-btn-unlike
-        span= gym.likes_count
+        i.fa.fa-heart.fa-fw.like-btn-red
+    = gym.likes_count
 
   - else
-    .like_on
+    .like_icon
       = link_to gym_likes_path(gym.id), method: :post, remote: true do
-        i.fa.fa-heart.fa-lg.fa-fw.like-btn
-        | お気に入り
-        span= gym.likes_count
+        i.fa.fa-heart.fa-fw.like-btn-gray
+    | お気に入り
+    = gym.likes_count
 
 - else
   .like_icon

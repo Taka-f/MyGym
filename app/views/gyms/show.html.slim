@@ -12,27 +12,32 @@
 
         div id= "likes_buttons_#{@gym.id}"
           = render partial: 'likes/like', locals: { gym: @gym, likes: @likes }
-        .reviews
+        .reviews-gym
           / = render partial: 'review', locals: { gym: @gym }
           ul
-            li.average-review-rating data-score="#{@average_review}"
+            li.average-review-rating data-score="#{@gym.rating_average}"
             li.average
               | (
-              = @gym.reviews.average(:rating)
+              = @gym.rating_average
               | )
           .number-of-reviews
             = @gym.reviews.count
             | 件のレビュー
-
-        - @gym.tags.each do |tag|
-          span.badge.badge-pill.badge-info
-            = tag.name
+        .tags
+          - @gym.tags.each do |tag|
+            span.badge.badge-pill.badge-info
+              = tag.name
     
         .pictures
           - @gym.pictures.each do |picture|
             = link_to picture.url, 'data-lightbox': picture do
               = image_tag picture, class: "gym-pictures"
-            
+      .links.btn-group
+        - if user_signed_in?
+          - if @gym.user_id == current_user.id
+            = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
+            = link_to "削除", gym_path(@gym), method: :delete,
+            data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"      
     .col-lg-6
       .gym-info
         h4 店舗情報
@@ -67,21 +72,16 @@
     .col-lg-12
       .reviews
         h2 口コミ
-        - if user_signed_in?
-          = render @gym.reviews.includes(:goods)
-        - else
-          = render @gym.reviews
         div
-          = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom"
-      
-      .links.btn-group
+          = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom2"
         - if user_signed_in?
-          - if @gym.user_id == current_user.id
-            = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
-            = link_to "削除", gym_path(@gym), method: :delete,
-            data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"
-
-    = link_to "戻る", root_path, class: "btn btn-custom"
+          = render @gym.reviews.includes(:goods, :user)
+        - else
+          = render @gym.reviews.includes(:user)
+      
+      
+    .back_home
+      = link_to "戻る", root_path, class: "btn btn-custom"
   .row
     .col-lg-12
       h3 #人気なジム

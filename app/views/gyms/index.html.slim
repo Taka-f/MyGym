@@ -3,7 +3,7 @@
     h1.display-3.text-light My Gym
     .sub
       span I
-      i.fa.fa-heart.fa-fw.like-btn-unlike
+      i.fa.fa-heart.fa-fw.like-btn-red
       span Workout.
     h3.text-light あなたの理想のジムを見つけよう。   
     = render 'search_form'
@@ -19,7 +19,7 @@
     h3 #人気なジム
     .row.justify-content-center
       - @like_ranks.each do |gym|
-        = render partial: 'card', locals: { gym: gym }
+        = render partial: 'gyms/card', locals: { gym: gym }
 
     h3 #レビューの多いジム
     .row.justify-content-center

@@ -20,7 +20,7 @@
 class Gym < ApplicationRecord
   belongs_to :user
   belongs_to :area
-  has_many :reviews, dependent: :delete_all
+  has_many :reviews, dependent: :destroy
   has_many :gym_tag_relations, dependent: :delete_all
   has_many :tags, through: :gym_tag_relations
   has_many :likes, dependent: :destroy
@@ -39,6 +39,15 @@ class Gym < ApplicationRecord
 
   def self.create_review_ranks
     Gym.includes(:area).find(Review.group(:gym_id).order('count(gym_id) desc').limit(4).pluck(:gym_id))
+  end
+
+  def rating_average
+    if self.reviews.blank?
+      average_review = 0
+    else
+      average_review = self.reviews.average(:rating).round(2)
+    end
+    # self.reviews.average(:rating).round(2)
   end
 private
 

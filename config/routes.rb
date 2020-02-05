@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'good/create'
 
-  get 'good/destroy'
-
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+  resources :users, only: [:show]
   resources :gyms do
     resources :likes, only: [:create, :destroy]
     resources :reviews do

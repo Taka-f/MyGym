@@ -15,7 +15,7 @@
 class Review < ApplicationRecord
   belongs_to :gym
   belongs_to :user
-  has_many :goods
+  has_many :goods, dependent: :delete_all
   has_many :good_users, through: :goods, source: :user
   validates :comment, presence: true
   validates :rating, presence: true

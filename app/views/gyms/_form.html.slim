@@ -3,9 +3,16 @@
 
 = simple_form_for @gym, html: { multipart: true } do |f|
   = select_tag(:area_id, options_for_select(@areas), :prompt => "エリアを選択")
-  / = f.select :area_id, options_from_collection_for_select(Area.all, :id, :name), prompt: "エリアを選択"
-  / = f.input :pictures, multiple: true, as: :file, accept: 'image/jpeg,image/gif,image/png'
-  = f.file_field :pictures, multiple: true, id: :gym_img, accept: 'image/jpeg,image/gif,image/png'
+  .gym-images
+    p 写真を投稿
+    - if @gym.pictures.present?
+      .gym_img
+        = image_tag @gym.pictures.url, id: :img_prev
+    - else
+      .no_img
+        = image_tag 'no_gym.png', id: :img_prev
+    = f.file_field :pictures, multiple: true, id: :gym_img, accept: 'image/jpeg,image/gif,image/png'
+  
   = f.input :name, label: "店名"
   = f.input :address, label: "住所"
   = f.input :time, label: "営業時間"
@@ -17,7 +24,7 @@
       = tag.label class: 'form-check-label' do
         = tag.check_box class: 'form-check-input'
         = tag.text
-  = f.button :submit, "投稿"
+  = f.button :submit, "投稿", class: "btn btn-custom2"
   = link_to "戻る", root_path, class: "btn btn-custom"
 
 javascript:
@@ -28,3 +35,18 @@ javascript:
      }
    });
 
+javascript:
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#gym_img").change(function(){
+        readURL(this);
+    });
+  });

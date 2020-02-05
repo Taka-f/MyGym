@@ -1,8 +1,22 @@
-h1 ユーザー詳細
-h3
-  = @user.name
-h3 お気に入りのジム
-- @user.liked_gyms.each do |gym|
-  = gym.user.name
+.row.justify-content-center
+  .container-form
+    .profile
+      .circle-image
+        - if current_user.image.url.present?
+          = image_tag current_user.image.url, id: :img_prev
+        - else
+          = image_tag 'no_image.png', id: :img_prev
+      p 
+        = @user.name
+      h5 お気に入りジム
+      .liked_gym
+        - @user.liked_gyms.each do |gym|
+          a href="/gyms/#{gym.id}"
+            = image_tag gym.pictures[0].url 
+      h5 マイレビュー
+      - @user.reviews.includes(:goods, :gym).each do |review|
+        = render partial: 'reviews/review', locals: { review: review }
+          / = render partial: 'gyms/card', locals: { gym: gym }
 
-= link_to "トップページへ戻る", gyms_path
+      = link_to 'アカウント編集', edit_user_registration_path, class: 'btn btn-outline-info btn-block mt-4'
+      = link_to "トップページへ戻る", gyms_path, class: 'btn btn-outline-secondary btn-block'

@@ -5,13 +5,13 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
+    @review = Review.includes(:gym, :goods)
   end
 
   def create
     @review = Review.new(review_params)
     @review.gym_id = @gym.id
     @review.user_id = current_user.id
-    
     if @review.save
       flash[:notice] = 'レビューを投稿しました'
       redirect_to @gym
