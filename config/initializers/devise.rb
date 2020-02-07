@@ -296,4 +296,22 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email', info_fields: 'email', callback_url: "#{ENV['HOST']}/users/auth/facebook/callback"
+  # config.omniauth :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET'], scope: 'email', oauth_callback: "#{ENV['HOST']}/users/auth/twitter/callback"
+  # config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], scope: 'email,calendar', redirect_uri: "#{ENV['HOST']}/users/auth/google_oauth2/callback"
+  # OmniAuth.config.logger = Rails.logger if Rails.env.development?
+
+  # config.omniauth :facebook, '2543418715939279', '16a834a2895f67e66059a10635a446b8'
+
+  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
+  config.omniauth :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET']
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], skip_jwt: true
 end
+
+# FACEBOOK_KEY=2543418715939279
+# FACEBOOK_SECRET=16a834a2895f67e66059a10635a446b8
+# TWITTER_API_KEY=zSWelJRQxVoMtyBJzEO2fkfST
+# TWITTER_API_SECRET=cJlOvdpYxNgKVzkAokSHGTk5CcBjhlKXE7Wg3DowxbSR0Hh6xM
+# GOOGLE_CLIENT_ID=3826346845-3i0cincuchoivf4hqbv46033g7k51v43.apps.googleusercontent.com
+# GOOGLE_CLIENT_SECRET=yiR8HT2-dAMUYOLEDWf_cZPW

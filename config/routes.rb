@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'}
   resources :users, only: [:show]
   resources :gyms do
     resources :likes, only: [:create, :destroy]

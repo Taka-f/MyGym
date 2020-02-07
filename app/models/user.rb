@@ -7,9 +7,11 @@
 #  encrypted_password     :string           default(""), not null
 #  image                  :string
 #  name                   :string
+#  provider               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -30,6 +32,26 @@ class User < ApplicationRecord
     self.goods.exists?(review_id: review.id)
   end
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #   end
+  # end
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+ 
+    unless user
+      user = User.create(
+        uid:      auth.uid,
+        provider: auth.provider,
+        email:    auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
+    end
+ 
+    user
+  end
 end

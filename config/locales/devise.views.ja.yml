@@ -10,7 +10,6 @@ ja:
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
         email: Eメール
-        name: ニックネーム
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -43,7 +42,7 @@ ja:
       locked: アカウントは凍結されています。
       not_found_in_database: "%{authentication_keys}またはパスワードが違います。"
       timeout: セッションがタイムアウトしました。もう一度ログインしてください。
-      unauthenticated: 新規登録もしくはログインしてください。
+      unauthenticated: アカウント登録もしくはログインしてください。
       unconfirmed: メールアドレスの本人確認が必要です。
     mailer:
       confirmation_instructions:
@@ -101,8 +100,8 @@ ja:
         update: 更新
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
       new:
-        sign_up: 新規登録
-      signed_up: 新規登録が完了しました。
+        sign_up: アカウント登録
+      signed_up: アカウント登録が完了しました。
       signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
       signed_up_but_locked: アカウントが凍結されているためログインできません。
       signed_up_but_unconfirmed: 本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。
@@ -123,7 +122,7 @@ ja:
         forgot_your_password: パスワードを忘れましたか?
         sign_in: ログイン
         sign_in_with_provider: "%{provider}でログイン"
-        sign_up: 新規登録
+        sign_up: アカウント登録
       minimum_password_length: "（%{count}字以上）"
     unlocks:
       new:

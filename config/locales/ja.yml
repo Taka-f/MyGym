@@ -9,10 +9,10 @@ ja:
       review:
         comment: コメント
         rating: レビュー
-  views:
-    pagination:
-      first: 最初
-      last: 最後
-      previous: 前
-      next: 次
-      truncate: ...
+    views:
+      pagination:
+        first: 最初
+        last: 最後
+        previous: 前
+        next: 次
+        truncate: ...
