@@ -2,6 +2,7 @@
  @import "bootstrap";
  @import "bootstrap-social";
  @import "font-awesome";
+ @import "social-share-button";
 
  body {
    font-family: 'Arial Rounded MT Bold','Trebuchet MS','ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN','ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
@@ -39,8 +40,23 @@
     padding: 5px;
     margin: 1px;
   }
- }
-
+  .like-button {
+    display: inline-block;
+  }
+  .share-button {
+    margin-left: 10px;
+    display: inline-block;
+    .fa {
+      font-size: 2rem;
+      margin: .5rem .5rem 0 .5rem;
+      position:relative;
+      top: 5px;
+      &:hover {
+        color: #5cf5dc!important;
+      }
+    }
+  }
+}
 //  フォーム
  .container-form {
    @extend .container-fluid;
@@ -314,4 +330,26 @@
 .back_home {
   display: block;
   margin: 10px 0 0 auto;
+}
+
+footer {
+  background-color: #fff;
+  padding: 2rem 0 2rem;
+  margin-top: 1rem;
+  .fa {
+    font-size: 2rem;
+    margin: 1rem;
+    &:hover {
+      color: #5cf5dc!important;
+    }
+  }
+  .socket {
+    width: 100%;
+    border-top: 1px solid #b1bac4;
+    margin-top: 2rem;
+  }
+  p {
+    margin-top: 10px;
+    color: #82aee0;
+  }
 }

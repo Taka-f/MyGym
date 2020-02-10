@@ -16,4 +16,5 @@
 //= require popper
 //= require_tree .
 //= require bootstrap-sprockets
+//= require social-share-button
 

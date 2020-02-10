@@ -10,10 +10,14 @@
         h2.gym-name
           = @gym.name
 
-        div id= "likes_buttons_#{@gym.id}"
+        .like-button id= "likes_buttons_#{@gym.id}"
           = render partial: 'likes/like', locals: { gym: @gym, likes: @likes }
+        .share-button
+          = link_to "https://twitter.com/share?url=#{request.url}&text=#{@gym.name}", target: '_blank'
+            i.fa.fa-twitter-square
+          = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}&text=#{@gym.name}", target: '_blank'
+            i.fa.fa-facebook-square
         .reviews-gym
-          / = render partial: 'review', locals: { gym: @gym }
           ul
             li.average-review-rating data-score="#{@gym.rating_average}"
             li.average

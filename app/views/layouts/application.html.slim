@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Myapp
+      | My Gym
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -21,3 +21,6 @@ html
         = flash[:notice]
     
     = yield
+  footer
+    = render 'layouts/footer'
+    

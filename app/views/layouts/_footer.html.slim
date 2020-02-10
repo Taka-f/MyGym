@@ -1,0 +1,11 @@
+.row.justify-content-center
+  .col-md-12.text-center
+    .img
+      = image_tag "logo.png"
+    a href="https://www.facebook.com/sharer/sharer.php?u=#{request.url}&text=タイトル" target="_blank" title="My Gym"
+      i.fa.fa-facebook-square
+    a href="https://www.twitter.com/share?url=#{request.url}" target="_blank"
+      i.fa.fa-twitter-square
+    p \ share me /
+  hr.socket
+  p &copy; 2020 My Gym All Rights Reserved.
