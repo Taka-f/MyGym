@@ -1,5 +1,7 @@
 
  @import "bootstrap";
+ @import "bootstrap-social";
+ @import "font-awesome";
 
  body {
    font-family: 'Arial Rounded MT Bold','Trebuchet MS','ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN','ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
@@ -297,7 +299,18 @@
     border-bottom: none;
 	}	
 }
-
+.sns-login {
+  .btn {
+    display: block;
+    opacity: 0.9;
+    margin-bottom: 5px;
+    // width: 250px;
+    text-align: center;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
 .back_home {
   display: block;
   margin: 10px 0 0 auto;

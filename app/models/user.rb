@@ -34,24 +34,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #   end
-  # end
-  def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
- 
-    unless user
-      user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        email:    auth.info.email,
-        password: Devise.friendly_token[0, 20]
-      )
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.remote_image_url = auth.info.image.gsub("_normal","") if user.provider == "twitter"
+      user.remote_image_url = auth.info.image.gsub("picture","picture?type=large") if user.provider == "facebook"
+      user.remote_image_url = auth.info.image if user.provider == "google_oauth2"
+      user.password = Devise.friendly_token[0,20]
     end
- 
-    user
   end
+
 end
