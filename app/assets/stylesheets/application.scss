@@ -334,11 +334,12 @@
 
 footer {
   background-color: #fff;
-  padding: 2rem 0 2rem;
-  margin-top: 1rem;
+  img{
+    margin-top: 5px;
+  }
   .fa {
     font-size: 2rem;
-    margin: 1rem;
+    margin: .5rem;
     &:hover {
       color: #5cf5dc!important;
     }
@@ -346,10 +347,10 @@ footer {
   .socket {
     width: 100%;
     border-top: 1px solid #b1bac4;
-    margin-top: 2rem;
+    margin-top: 0;
   }
   p {
-    margin-top: 10px;
+    margin-bottom: 10px;
     color: #82aee0;
   }
 }
