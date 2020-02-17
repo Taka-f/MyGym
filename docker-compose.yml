@@ -12,10 +12,4 @@ services:
     depends_on:
       - db
     stdin_open: true
-    # environment: 
-      # - FACEBOOK_KEY: '2543418715939279'
-      # - FACEBOOK_SECRET: '16a834a2895f67e66059a10635a446b8'
-      # - TWITTER_API_KEY: 'zSWelJRQxVoMtyBJzEO2fkfST'
-      # - TWITTER_API_SECRET: 'cJlOvdpYxNgKVzkAokSHGTk5CcBjhlKXE7Wg3DowxbSR0Hh6xM'
-      # - GOOGLE_CLIENT_ID: '3826346845-3i0cincuchoivf4hqbv46033g7k51v43.apps.googleusercontent.com'
-      # - GOOGLE_CLIENT_SECRET: 'yiR8HT2-dAMUYOLEDWf_cZPW'
+    
