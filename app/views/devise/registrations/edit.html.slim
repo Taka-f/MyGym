@@ -6,7 +6,7 @@
       .form-inputs
         .circle-image
           - if current_user.image.present?
-            = image_tag current_user.image, id: :img_prev
+            = image_tag current_user.image.url, id: :img_prev
           - else
             = image_tag 'no_image.png', id: :img_prev
             = f.hidden_field :image_cache

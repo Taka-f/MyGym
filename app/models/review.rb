@@ -3,7 +3,7 @@
 # Table name: reviews
 #
 #  id         :bigint           not null, primary key
-#  comment    :text
+#  comment    :text(65535)
 #  good_count :integer
 #  rating     :integer
 #  created_at :datetime         not null

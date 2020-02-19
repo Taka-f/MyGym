@@ -3,14 +3,14 @@
 # Table name: gyms
 #
 #  id          :bigint           not null, primary key
-#  address     :string
-#  description :text
+#  address     :string(255)
+#  description :text(65535)
 #  likes_count :integer
-#  name        :string
-#  number      :string
-#  pictures    :string
-#  time        :string
-#  url         :string
+#  name        :string(255)
+#  number      :string(255)
+#  pictures    :string(255)
+#  time        :string(255)
+#  url         :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  area_id     :integer

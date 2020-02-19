@@ -12,16 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20200205100527) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "areas", force: :cascade do |t|
+  create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "goods", force: :cascade do |t|
+  create_table "goods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "review_id"
     t.datetime "created_at", null: false
@@ -30,7 +27,7 @@ ActiveRecord::Schema.define(version: 20200205100527) do
     t.index ["user_id"], name: "index_goods_on_user_id"
   end
 
-  create_table "gym_tag_relations", force: :cascade do |t|
+  create_table "gym_tag_relations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "gym_id"
     t.bigint "tag_id"
     t.datetime "created_at", null: false
@@ -39,7 +36,7 @@ ActiveRecord::Schema.define(version: 20200205100527) do
     t.index ["tag_id"], name: "index_gym_tag_relations_on_tag_id"
   end
 
-  create_table "gyms", force: :cascade do |t|
+  create_table "gyms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.text "description"
     t.string "number"
@@ -54,7 +51,7 @@ ActiveRecord::Schema.define(version: 20200205100527) do
     t.integer "likes_count"
   end
 
-  create_table "likes", force: :cascade do |t|
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "gym_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -63,7 +60,7 @@ ActiveRecord::Schema.define(version: 20200205100527) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "rating"
     t.text "comment"
     t.datetime "created_at", null: false
@@ -73,13 +70,13 @@ ActiveRecord::Schema.define(version: 20200205100527) do
     t.integer "good_count"
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
