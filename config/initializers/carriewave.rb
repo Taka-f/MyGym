@@ -13,10 +13,6 @@ CarrierWave.configure do |config|
       aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       region: ENV['AWS_REGION'],
       path_style: true
-      # aws_access_key_id: ENV['AKIAZ47DHWYEEXPLQQEO'],
-      # aws_secret_access_key: ENV['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'],
-      # region: 'ap-northeast-1', 
-      # path_style: true
     }
   else
     config.storage :file

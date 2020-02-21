@@ -21,4 +21,6 @@
 .DS_Store
 /vendor/bundle
 
-.env
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
