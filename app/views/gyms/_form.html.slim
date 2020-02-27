@@ -12,7 +12,7 @@
       .no_img
         = image_tag 'no_gym.png', id: :img_prev
     = f.file_field :pictures, multiple: true, id: :gym_img, accept: 'image/jpeg,image/gif,image/png'
-  
+    = f.hidden_field :pictures_cache
   = f.input :name, label: "店名"
   = f.input :address, label: "住所"
   = f.input :time, label: "営業時間"

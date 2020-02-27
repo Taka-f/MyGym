@@ -32,7 +32,7 @@ class Gym < ApplicationRecord
   validates :pictures, presence: true
   validates :name, presence: true
   validates :address, presence: true
-
+  
   def self.create_like_ranks
     Gym.includes(:area).find(Like.group(:gym_id).order('count(gym_id) desc').limit(4).pluck(:gym_id))
   end
@@ -47,7 +47,6 @@ class Gym < ApplicationRecord
     else
       average_review = self.reviews.average(:rating).round(2)
     end
-    # self.reviews.average(:rating).round(2)
   end
 private
 

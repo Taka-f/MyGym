@@ -1,11 +1,11 @@
-.container
-  .row
-    .col-lg-6
+.container-fluid
+  .row.justify-content-center
+    .col-lg-5
       .gym-info
         .a.pictures
           - @gym.pictures.each do |picture|
             .b
-              = image_tag picture.url, alt: 'gym image', class: "rounded c", width: '100%', height: 380
+              = image_tag picture.url, alt: 'gym image', class: "rounded c"
         
         h2.gym-name
           = @gym.name
@@ -42,7 +42,7 @@
             = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
             = link_to "削除", gym_path(@gym), method: :delete,
             data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"      
-    .col-lg-6
+    .col-lg-5
       .gym-info
         h4 店舗情報
         table.table
@@ -72,22 +72,21 @@
         width: '100%',
         height: 320,
         frameborder: 0)
-  .row
-    .col-lg-12
+        .back_home
+          = link_to "戻る", root_path, class: "btn btn-custom"
+  .row.justify-content-center
+    .col-lg-10
       .reviews
         h2 口コミ
         div
           = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom2"
         - if user_signed_in?
-          = render @gym.reviews.includes(:goods, :user)
-        - else
-          = render @gym.reviews.includes(:user)
+          = render @gym.reviews
       
       
-    .back_home
-      = link_to "戻る", root_path, class: "btn btn-custom"
-  .row
-    .col-lg-12
+    
+  .row.justify-content-center
+    .col-lg-10
       h3 #人気なジム
       .row.justify-content-center
         - @like_ranks.each do |gym|

@@ -1,5 +1,5 @@
 .row.justify-content-center
-  .container-form
+  .container-form.col-lg-6
     .profile
       .circle-image
         - if current_user.image.url.present?
@@ -14,9 +14,8 @@
           a href="/gyms/#{gym.id}"
             = image_tag gym.pictures[0].url 
       h5 マイレビュー
-      - @user.reviews.includes(:goods, :gym).each do |review|
+      - @user.reviews.each do |review|
         = render partial: 'reviews/review', locals: { review: review }
-          / = render partial: 'gyms/card', locals: { gym: gym }
 
       = link_to 'アカウント編集', edit_user_registration_path, class: 'btn btn-outline-info btn-block mt-4'
       = link_to "トップページへ戻る", gyms_path, class: 'btn btn-outline-secondary btn-block'

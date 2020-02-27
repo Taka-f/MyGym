@@ -1,7 +1,7 @@
 .col-lg-3.col-md-5
   .card.index-card
     a href="/gyms/#{gym.id}"
-      = image_tag gym.pictures[0].url, class: "card-img-top" , width: 'auto', height: 170
+      = image_tag gym.pictures[0].url, class: "card-img-top" , width: 'auto', height: 190
     .card-body
       h6.card-title = link_to gym.name, gym, style: 'color: black;'
       .like
@@ -15,11 +15,11 @@
             = gym.rating_average
             / = gym.reviews.average(:rating).to_i
             | )
-      .number-of-reviews
-        = gym.reviews.count
-        | 件のレビュー 
-        .area-name.number-of-reviews
-          = gym.area.name
+        .number-of-reviews
+          = gym.reviews.count
+          | 件のレビュー 
+          .area-name.number-of-reviews
+            = gym.area.name
 
 
 javascript:

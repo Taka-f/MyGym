@@ -15,12 +15,13 @@ html
     link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
     script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
   body
-    = render 'layouts/header'
-    - if flash[:notice]
-      .alert.alert-primary
-        = flash[:notice]
-    
-    = yield
-  footer
-    = render 'layouts/footer'
+    #wrapper
+      = render 'layouts/header'
+      - if flash[:notice]
+        .alert.alert-primary
+          = flash[:notice]
+      
+      = yield
+      footer
+        = render 'layouts/footer'
     

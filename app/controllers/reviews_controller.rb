@@ -52,4 +52,5 @@ class ReviewsController < ApplicationController
     def find_review
       @review = Review.find(params[:id])
     end
+
 end

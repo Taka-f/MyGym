@@ -2,11 +2,21 @@
  @import "bootstrap";
  @import "bootstrap-social";
  @import "font-awesome";
-
+ html {
+   height: 100%;
+ }
  body {
    font-family: 'Arial Rounded MT Bold','Trebuchet MS','ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN','ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
    background-color: #f7f7f7;
+   height: 100%;
+   #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+  }
  }
+
  .top-page h3 {
    margin-top: 30px;
  }
@@ -14,6 +24,11 @@
 // ジムの詳細
  .gym-info {
    margin-top: 50px;
+   .c {
+     width: 100%;
+     height: 450px;
+    //  object-fit: cover;
+   }
    h2.gym-name {
      margin-top: 10px;
    }
@@ -54,16 +69,26 @@
         color: #5cf5dc!important;
       }
     }
+    .fa-facebook-square {
+      color: #3c5c9a;
+     }
+     .fa-twitter-square {
+      color: #00adee;
+     }
   }
+}
+.reviews {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 //  フォーム
  .container-form {
-   @extend .container-fluid;
-   max-width: 576px;
-   padding: 2rem;
+  //  @extend .container-fluid;
+  //  max-width: 640px;
+   padding: 4rem;
    background-color: #fff;
-   margin-top: 5em;
-   margin-bottom: 5em;
+   margin-top: 3em;
+   margin-bottom: 3em;
    border-radius: 15px;
    box-shadow: 1px 1px 5px rgba(87, 87, 87, 0.25);
  }
@@ -75,7 +100,12 @@
  .nav-link {
    font-size: 1.1em !important;
    margin-right: 10px;
+   color: #499ce0 !important;
+   &:hover {
+     color: #5cf5dc !important;
+   }
  }
+ 
  .jumbotron {
    padding-top: 100px;
    padding-bottom: 80px;
@@ -110,9 +140,10 @@
   }
   .card-body {
     padding: 10px;
+    height: 170px;
     .card-title {
       display: block;
-      height: 30px;
+      height: 20px;
     }
     .reviews ul {
       padding-left: 0;
@@ -326,22 +357,34 @@
     }
   }
 }
-.back_home {
-  display: block;
-  margin: 10px 0 0 auto;
-}
+// .back_home {
+//   display: block;
+//   margin: 10px 0 0 auto;
+// }
 
 footer {
   background-color: #fff;
+  margin-top: auto;
   img{
     margin-top: 5px;
   }
-  .fa {
+  a {
+   .fa-facebook-square {
     font-size: 2rem;
     margin: .5rem;
+    color: #3c5c9a;
     &:hover {
       color: #5cf5dc!important;
     }
+   }
+   .fa-twitter-square {
+    font-size: 2rem;
+    margin: .5rem;
+    color: #00adee;
+    &:hover {
+      color: #5cf5dc!important;
+    }
+   }
   }
   .socket {
     width: 100%;
@@ -351,5 +394,13 @@ footer {
   p {
     margin-bottom: 10px;
     color: #82aee0;
+  }
+}
+
+.gym-images {
+  margin-bottom: 10px;
+  p {
+    margin-bottom: 0px;
+    margin-top: 10px;
   }
 }

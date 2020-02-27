@@ -19,7 +19,6 @@ class GymsController < ApplicationController
   end
 
   def show
-    
     # if @gym.reviews.blank?
     #   @average_review = 0
     # else
@@ -68,7 +67,7 @@ class GymsController < ApplicationController
   private
 
   def gym_params
-    params.require(:gym).permit({pictures: []}, :name, :description, :number, :address, :area_id, :time, :url, :area_id, tag_ids: [])
+    params.require(:gym).permit({pictures: []}, :pictures_cache, :name, :description, :number, :address, :area_id, :time, :url, :area_id, tag_ids: [])
   end
 
   def find_gym
