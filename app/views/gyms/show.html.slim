@@ -36,12 +36,12 @@
           - @gym.pictures.each do |picture|
             = link_to picture.url, 'data-lightbox': picture do
               = image_tag picture.url, class: "gym-pictures"
-      .links.btn-group
-        - if user_signed_in?
-          - if @gym.user_id == current_user.id
-            = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
-            = link_to "削除", gym_path(@gym), method: :delete,
-            data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"      
+        .links.btn-group id='gym-info'
+          - if user_signed_in?
+            - if @gym.user_id == current_user.id
+              = link_to "編集", edit_gym_path(@gym), class: "btn btn-custom"
+              = link_to "削除", gym_path(@gym), method: :delete,
+              data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-custom"      
     .col-lg-5
       .gym-info
         h4 店舗情報

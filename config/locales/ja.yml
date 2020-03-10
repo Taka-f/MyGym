@@ -3,7 +3,7 @@ ja:
     attributes:
       gym:
         name: 名前
-        picture: 写真
+        pictures: 写真
         address: 住所
         area: エリア
       review:

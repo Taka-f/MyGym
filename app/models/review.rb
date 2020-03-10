@@ -17,7 +17,7 @@ class Review < ApplicationRecord
   belongs_to :user
   has_many :goods, dependent: :delete_all
   has_many :good_users, through: :goods, source: :user
-  validates :comment, presence: true
+  validates :comment, presence: true, length: {maximum: 300}
   validates :rating, presence: true
 
   def good_user(user_id)

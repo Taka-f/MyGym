@@ -18,12 +18,13 @@
 
 class User < ApplicationRecord
   has_many :gyms
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :goods
   has_many :likes
   has_many :liked_gyms, through: :likes, source: :gym
   mount_uploader :image, PictureUploader
-
+  validates :name, presence: true
+  
   def already_liked?(gym)
     self.likes.exists?(gym_id: gym.id)
   end

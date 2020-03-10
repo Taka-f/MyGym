@@ -15,7 +15,7 @@ class GymsController < ApplicationController
 
   def search
     @q = Gym.ransack(params[:q])
-    @gyms = @q.result(distinct: true).includes(:area).page(params[:page]).per(4)
+    @gyms = @q.result(distinct: true).includes(:area, :reviews).page(params[:page]).per(4)
   end
 
   def show
@@ -67,7 +67,7 @@ class GymsController < ApplicationController
   private
 
   def gym_params
-    params.require(:gym).permit({pictures: []}, :pictures_cache, :name, :description, :number, :address, :area_id, :time, :url, :area_id, tag_ids: [])
+    params.require(:gym).permit({pictures: []}, :pictures_cache, :name, :description, :number, :address, :area_id, :time, :url, tag_ids: [])
   end
 
   def find_gym

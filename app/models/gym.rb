@@ -30,8 +30,8 @@ class Gym < ApplicationRecord
   serialize :pictures, JSON
   validate :picture_size
   validates :pictures, presence: true
-  validates :name, presence: true
-  validates :address, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :address, presence: true, uniqueness: true
   
   def self.create_like_ranks
     Gym.includes(:area).find(Like.group(:gym_id).order('count(gym_id) desc').limit(4).pluck(:gym_id))

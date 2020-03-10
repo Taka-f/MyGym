@@ -7,7 +7,7 @@
     p 写真を投稿
     - if @gym.pictures.present?
       .gym_img
-        = image_tag @gym.pictures.url, id: :img_prev
+        = image_tag @gym.pictures[0].url, id: :img_prev
     - else
       .no_img
         = image_tag 'no_gym.png', id: :img_prev

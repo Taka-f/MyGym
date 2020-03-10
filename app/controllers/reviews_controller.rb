@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
     @review.gym_id = @gym.id
     @review.user_id = current_user.id
     if @review.save
-      flash[:notice] = 'レビューを投稿しました'
+      flash[:notice] = '口コミを投稿しました'
       redirect_to @gym
     else
       flash[:error_messages] = @review.errors.full_messages
@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    flash[:notice] = 'レビューを削除しました'
+    flash[:notice] = '口コミを削除しました'
     redirect_to @gym
   end
 
