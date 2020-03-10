@@ -21,18 +21,11 @@ services:
     depends_on:
       - db
       - chrome
-    # environment:
-      # - RAILS_SYSTEM_TESTING_SCREENSHOT=inline
-      # - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
     # tty: true
   chrome:
     image: selenium/standalone-chrome:3.141.59-dubnium
     ports:
       - 4444:4444
-  # selenium_chrome:
-  #   image: selenium/standalone-chrome-debug
-  #   logging:
-  #     driver: none
 
   nginx:
     build: containers/nginx
