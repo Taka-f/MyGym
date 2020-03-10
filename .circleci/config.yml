@@ -6,8 +6,10 @@ jobs:
       - image: circleci/mysql:5.7
 
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-      - MYSQL_ROOT_HOST: '%'
+      # - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      # - MYSQL_ROOT_HOST: '%'
+      - MYSQL_PASSWORD: password
+      - MYSQL_USER: root
       - RAILS_ENV: 'test'
       - BUNDLER_VERSION: 2.0.2
 
@@ -32,17 +34,13 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run: mv config/database.yml.ci config/database.yml 
+      # - run: mv config/database.yml.ci config/database.yml 
 
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
-      # - run:
-      #     name: Rubocop
-      #     command: bundle exec rubocop
-
-
+      
       # run tests!
       - run:
           name: run tests
@@ -64,15 +62,3 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-      - add_ssh_keys:
-          fingerprints:
-            - "XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX"
-
-      # - deploy:
-      #     name: Capistrano deploy
-      #     command: |
-      #       if [ "${CIRCLE_BRANCH}" != "master" ]; then
-      #         exit 0
-      #       fi
-      #       bundle exec cap production deploy
