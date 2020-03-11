@@ -10,10 +10,12 @@ default: &default
 development:
   <<: *default
   database: app_development
+  host: <%= ENV.fetch("DB_HOST") { 'localhost' } %>
 
 test:
   <<: *default
   database: app_test
+  host: <%= ENV.fetch("DB_HOST") { 'localhost' } %>
 
 production:
   <<: *default
