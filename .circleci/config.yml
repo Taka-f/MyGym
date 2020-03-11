@@ -10,7 +10,7 @@ jobs:
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: root
+          MYSQL_DATABASE: app_test
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
