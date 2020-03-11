@@ -1,42 +1,66 @@
 version: 2
 jobs:
-  test:
+  build:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers-legacy
+      # specify the version you desire here
+      - image: circleci/ruby:2.5.1-node-browsers
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-          DB_USERNAME: "root"
-          DB_PASSWORD: "password"
+          DB_USERNAME: 'root'
+          DB_PASSWORD: ''
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mysql:5.7
-        command: [--default-authentication-plugin=mysql_native_password]
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ""
-          MYSQL_DATABASE: test_db
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_ROOT_HOST: "%"
-          MYSQL_USER: root
+
     working_directory: ~/app
 
     steps:
       - checkout
 
+      # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run: gem install bundler -v 2.0.1
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: 
-          name: Wait Docker container
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 2m
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+
+      # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
+
+      # run tests!
       - run:
-          name: Rspec
-          command: bundle exec rspec
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
