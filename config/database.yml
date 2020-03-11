@@ -12,7 +12,7 @@ development:
 
 test:
   <<: *default
-  host: <%= ENV.fetch("DB_HOST") { 'db' } %>
+  host: <%= ENV.fetch("DB_HOST") { '127.0.0.1' } %>
   database: app_test
 
 production:
