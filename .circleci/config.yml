@@ -1,38 +1,43 @@
-version: 2
-
+version: 2.1
 jobs:
-  test:
+  build:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
-        environment:
-          RAILS_ENV: test
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_USERNAME: 'root'
-          MYSQL_PASSWORD: ''
-          MYSQL_PORT: 3306
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_ROOT_HOST: '%'
-          MYSQL_DATABASE: app_test
+    - image: circleci/ruby:2.5.3-node
+      environment:
+        RAILS_ENV: test
+        MYSQL_HOST: 127.0.0.1
+        MYSQL_USERNAME: 'root'
+        MYSQL_PASSWORD: ''
+        MYSQL_PORT: 3306
+    - image: circleci/mysql:5.7-ram
+      environment:
+        MYSQL_DATABASE: app_test
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_ROOT_HOST: '%'
     working_directory: ~/app
     steps:
-      - checkout
-      - run:
-          name: bundle install
-          command: bundle install --path vendor/bundle
-      - run:
-          name: データベースの起動を待機
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-      # Database setup
-      - run: rm ./config/database.yml
-      - run: mv ./config/database.yml.ci ./config/database.yml
-      - run:
-          name: Prepare db
-          command: |
-            bundle exec rake db:create db:schema:load --trace
-      # run tests!
-      - run:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "Gemfile.lock" }}
+        - v1-dependencies-
+    - run:
+        name: install dependencies
+        command: |
+          bundle install --jobs=4 --retry=3 --path vendor/bundle
+    - save_cache:
+        paths:
+        - ./vendor/bundle
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+    # Database setup
+    - run: rm ./config/database.yml
+    - run: mv ./config/database.yml.ci ./config/database.yml
+    - run:
+        name: Prepare db
+        command: |
+          bundle exec rake db:create db:schema:load --trace
+    # run tests!
+    - run:
         name: Run rspec
         command: |
           mkdir /tmp/test-results
