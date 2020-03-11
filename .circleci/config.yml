@@ -8,8 +8,8 @@ jobs:
     environment:
       # - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
       # - MYSQL_ROOT_HOST: '%'
-      - MYSQL_PASSWORD: password
-      - MYSQL_USER: root
+      # - MYSQL_PASSWORD: password
+      # - MYSQL_USER: root
       - RAILS_ENV: 'test'
       - BUNDLER_VERSION: 2.0.2
 
