@@ -6,10 +6,14 @@ jobs:
       - image: circleci/ruby:2.5.1-node-browsers
         environment:
           RAILS_ENV: test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USERNAME: 'root'
+          MYSQL_PASSWORD: ''
+          MYSQL_PORT: 3306
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ROOT_HOST: '%'
           MYSQL_DATABASE: app_test
     working_directory: ~/app
     steps:
@@ -20,16 +24,24 @@ jobs:
       - run:
           name: データベースの起動を待機
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      # Database setup
+      - run: rm ./config/database.yml
+      - run: mv ./config/database.yml.ci ./config/database.yml
       - run:
-          name: データベースのセットアップ
-          command: bundle exec rake db:schema:load
-      - run: 
-          name: テストの実行
-          command: bundle exec rspec
+          name: Prepare db
+          command: |
+            bundle exec rake db:create db:schema:load --trace
+      # run tests!
+      - run:
+        name: Run rspec
+        command: |
+          mkdir /tmp/test-results
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+          bundle exec rspec --format progress --color --format documentation
 
-
-workflows:
-  version: 2
-  workflows:
-    jobs:
-      - test
+    # collect reports
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
