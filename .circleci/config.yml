@@ -24,7 +24,7 @@ jobs:
           command: docker-compose ps
       - run:
           name: データベースのセットアップ
-          command: docker-compose exec web bundle exec rails db:create db:migrate RAILS_ENV=test
+          command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test
       - run:
           name: RSpecテスト実行
           command: docker-compose exec web bin/rspec
