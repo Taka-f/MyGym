@@ -1,48 +1,30 @@
 version: 2
 jobs:
-  test:
+  build:
     machine:
       image: circleci/classic:edge
     steps:
       - checkout
       - run:
-          name: docker-compose build
+          name: database.ymlの再設定
+          command: |
+            rm ./config/database.yml
+            mv ./config/database.ci.yml ./config/database.yml
+      - run:
+          name: Dockerコンテナのビルド
           command: docker-compose build
       - run:
-          name: docker-compose up
+          name: Dockerコンテナの起動
           command: docker-compose up -d
       - run:
-          name: sleep for waiting launch db
-          command: sleep 1
+          name: データベースのセットアップ
+          command: docker-compose exec web bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
-          name: docker-compose ps
-          command: docker-compose ps
+          name: RSpecテスト実行
+          command: docker-compose exec web bundle exec bin/rspec
       - run:
-          name: test
-          command: |
-            mkdir /tmp/test-results
-            docker-compose run web bundle install
-            docker-compose build
-            docker-compose restart
-            docker-compose ps
-            docker-compose run web bundle exec rake db:create RAILS_ENV=test
-            docker-compose run web bundle exec rake db:migrate RAILS_ENV=test
-            TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
-            docker-compose run web bundle exec rspec --format progress \
-            --out /tmp/test-results/rspec.xml \
-            $TEST_FILES
+          name: Rubocopテスト実行
+          command: docker-compose exec web bundle exec rubocop
       - run:
-          name: docker-compose down
+          name: Dockerコンテナの停止
           command: docker-compose down
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
-
-
-workflows:
-  version: 2
-  test:
-    jobs:
-      - test
