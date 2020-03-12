@@ -18,17 +18,24 @@ jobs:
           name: docker-compose ps
           command: docker-compose ps
       - run:
-          name: bundle
-          command: docker-compose run rails bundle install
-      - run:
-          name: dbsetup    
-          command:  docker-compose run rails bundle exec rake db:create RAILS_ENV=test db:migrate RAILS_ENV=test
-      - run:
-          name: rspec
-          command: docker-compose run web bin/rspec      
+          name: test
+          command: |
+            mkdir /tmp/test-results
+            docker-compose run web bundle install
+            docker-compose run web bundle exec rake db:create RAILS_ENV=test
+            docker-compose run web bundle exec rake db:migrate RAILS_ENV=test
+            TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
+            docker-compose run web bundle exec rspec --format progress \
+            --out /tmp/test-results/rspec.xml \
+            $TEST_FILES
       - run:
           name: docker-compose down
           command: docker-compose down
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
 
 
 workflows:
