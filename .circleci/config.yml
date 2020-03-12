@@ -5,7 +5,6 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
-      - run: docker-compose down -v
       - run:
           name: docker-compose build
           command: docker-compose build
@@ -20,7 +19,8 @@ jobs:
           command: docker-compose ps
       - run:
           name: rails db:create and db:migrate
-          command: docker-compose run web rails db:create db:migrate
+          command: docker-compose exec web rails db:create
+          command: docker-compose exec web rails db:migrate
       - run:
           name: rspec
           command: docker-compose run web rspec
