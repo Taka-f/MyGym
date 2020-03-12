@@ -1,48 +1,40 @@
 version: 2
 jobs:
   test:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers-legacy
-        environment:
-          RAILS_ENV: test
-          DB_HOST: 127.0.0.1
-          DB_USERNAME: "root"
-          DB_PASSWORD: "password"
-      - image: circleci/mysql:5.7
-        command: [--default-authentication-plugin=mysql_native_password]
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ""
-          MYSQL_DATABASE: test_db
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_ROOT_HOST: "%"
-          MYSQL_USER: root
-    working_directory: ~/app
-
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run: gem install bundler -v 2.0.1
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: 
-          name: Wait Docker container
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 2m
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
       - run:
-          name: Rspec
-          command: bundle exec rspec
+          name: docker-compose build
+          command: docker-compose build
+      - run:
+          name: docker-compose up
+          command: docker-compose up -d
+      - run:
+          name: sleep for waiting launch db
+          command: sleep 1
+      - run:
+          name: bundle install
+          command: docker-compose run web bundle
+      - run:
+          name: restart
+          command: docker-compose restart
+      - run:
+          name: docker-compose ps
+          command: docker-compose ps
+      # - run:
+      #     name: rails db:create and db:migrate
+      #     command: docker-compose run web rails db:create db:migrate
+      - run:
+          name: rspec
+          command: docker-compose run web bin/rspec
+      - run:
+          name: docker-compose down
+          command: docker-compose down
 
 workflows:
   version: 2
-  test_and_deploy:
+  test:
     jobs:
       - test
