@@ -18,11 +18,11 @@ jobs:
           name: docker-compose ps
           command: docker-compose ps
       - run:
-          name: dbsetup
-          command: |
-            docker-compose run rails bundle install
-            docker-compose run rails bundle exec rake db:create RAILS_ENV=test
-            docker-compose run rails bundle exec rake db:migrate RAILS_ENV=test
+          name: bundle
+          command: docker-compose run rails bundle install
+      - run:
+          name: dbsetup    
+          command:  docker-compose run rails bundle exec rake db:create RAILS_ENV=test db:migrate RAILS_ENV=test
       - run:
           name: rspec
           command: docker-compose run web bin/rspec      
