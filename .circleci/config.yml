@@ -31,6 +31,12 @@ jobs:
       - run:
           name: docker-compose down
           command: docker-compose down
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
 
 workflows:
   version: 2
