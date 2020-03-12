@@ -5,6 +5,7 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      - run: docker-compose down -v
       - run:
           name: docker-compose build
           command: docker-compose build
