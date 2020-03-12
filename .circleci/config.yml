@@ -15,6 +15,12 @@ jobs:
           name: sleep for waiting launch db
           command: sleep 1
       - run:
+          name: bundle install
+          command: docker-compose run web bundle
+      - run:
+          name restart
+          command: docker-compose restart
+      - run:
           name: docker-compose ps
           command: docker-compose ps
       - run:
