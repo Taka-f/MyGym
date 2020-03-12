@@ -15,17 +15,14 @@ jobs:
           name: sleep for waiting launch db
           command: sleep 1
       - run:
-          name: restart
-          command: docker-compose restart
-      - run:
           name: docker-compose ps
           command: docker-compose ps
-      # - run:
-      #     name: rails db:create and db:migrate
-      #     command: docker-compose run web rails db:create db:migrate
+      - run:
+          name: rails db:create and db:migrate
+          command: docker-compose run web rails db:create db:migrate
       - run:
           name: rspec
-          command: docker-compose run web bin/rspec
+          command: docker-compose run web rspec
       - run:
           name: docker-compose down
           command: docker-compose down
