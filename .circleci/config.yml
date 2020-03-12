@@ -19,8 +19,8 @@ jobs:
           command: docker-compose ps
       - run:
           name: rails db:create and db:migrate
-          command: docker-compose exec web rails db:create
-          command: docker-compose exec web rails db:migrate
+          run: docker-compose exec web rails db:create
+          run: docker-compose exec web rails db:migrate
       - run:
           name: rspec
           command: docker-compose run web rspec
