@@ -8,8 +8,8 @@ jobs:
       - run:
           name: change database.yml
           command: |
-            rm ./config/database.yml
-            mv ./config/database.ci.yml ./config/database.yml
+            rm config/database.yml
+            mv config/database.ci.yml config/database.yml
       - run:
           name: build
           command: docker-compose build
