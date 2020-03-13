@@ -5,16 +5,16 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      # - run:
+      #     name: change database.yml
+      #     command: |
+      #       rm ./config/database.yml
+      #       mv ./config/database.ci.yml ./config/database.yml
       - run:
-          name: database.ymlの再設定
-          command: |
-            rm ./config/database.yml
-            mv ./config/database.ci.yml ./config/database.yml
-      - run:
-          name: Dockerコンテナのビルド
+          name: build
           command: docker-compose build
       - run:
-          name: Dockerコンテナの起動
+          name: docker-compose up
           command: docker-compose up -d
       - run:
           name: sleep for waiting launch db
@@ -23,11 +23,11 @@ jobs:
           name: docker-compose ps
           command: docker-compose ps
       - run:
-          name: データベースのセットアップ
+          name: dbsetup
           command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test
       - run:
-          name: RSpecテスト実行
+          name: RSpec test
           command: docker-compose exec web bin/rspec
       - run:
-          name: Dockerコンテナの停止
+          name: docker-compose down
           command: docker-compose down
