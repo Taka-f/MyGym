@@ -11,11 +11,6 @@ jobs:
             rm ./config/database.yml
             mv ./config/database.ci.yml ./config/database.yml
       - run:
-          name: make tmp
-          command: |
-            mkdir tmp/sockets
-            mkdir tmp/pids
-      - run:
           name: build
           command: docker-compose build
       - run:
