@@ -27,7 +27,7 @@ jobs:
           command: sleep 1
       - run:
           name: docker-compose ps
-          command: docker-compose ps
+          command: docker-compose logs
       - run:
           name: dbsetup
           command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test
