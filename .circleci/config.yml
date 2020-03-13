@@ -8,8 +8,8 @@ jobs:
       - run:
           name: change database.yml
           command: |
-            rm config/database.yml
-            mv config/database.ci.yml config/database.yml
+            rm ./config/database.yml
+            mv ./config/database.ci.yml ./config/database.yml
       - run:
           name: build
           command: docker-compose build
@@ -30,7 +30,7 @@ jobs:
           command: docker-compose logs
       - run:
           name: dbsetup
-          command: docker-compose run web bin/rails db:create RAILS_ENV=test
+          command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test
       - run:
           name: RSpec test
           command: docker-compose exec web bin/rspec
