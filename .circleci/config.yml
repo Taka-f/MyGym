@@ -5,9 +5,9 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
-      - run: # test what branch we're on.
-          name: "set master.key"
-          command: echo ${RAILS_MASTER_KEY}
+      # - run:
+      #     name: "set master.key"
+      #     command: echo ${RAILS_MASTER_KEY}
       - run:
           name: change database.yml
           command: |
@@ -19,12 +19,12 @@ jobs:
       - run:
           name: docker-compose up
           command: docker-compose up -d
-      - run:
-          name: bundle install
-          command: docker-compose run web bundle
-      - run:
-          name: docker-compose restart
-          command: docker-compose restart
+      # - run:
+      #     name: bundle install
+      #     command: docker-compose run web bundle
+      # - run:
+      #     name: docker-compose restart
+      #     command: docker-compose restart
       - run:
           name: sleep for waiting launch db
           command: sleep 1
