@@ -6,6 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: root
+      RAILS_ENV: development
+      DATABASE_URL: mysql2://root:root@mysql:3306 
     ports:
       - "3306:3306"
 
@@ -22,7 +24,7 @@ services:
       - db
       - chrome
     tty: true
-    
+
   chrome:
     image: selenium/standalone-chrome:3.141.59-dubnium
     ports:
