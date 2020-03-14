@@ -5,6 +5,9 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      - run: # test what branch we're on.
+          name: "set master.key"
+          command: echo ${RAILS_MASTER_KEY}
       - run:
           name: change database.yml
           command: |
