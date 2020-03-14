@@ -15,7 +15,7 @@ jobs:
       #       mv ./config/database.ci.yml ./config/database.yml
       - run:
           name: build
-          command: docker-compose build -arg RAILS_MASTER_KEY =${RAILS_MASTER_KEY}
+          command: docker-compose build RAILS_MASTER_KEY =${RAILS_MASTER_KEY}
       - run:
           name: docker-compose up
           command: docker-compose up -d
