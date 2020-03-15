@@ -2,13 +2,9 @@ version: 2
 jobs:
   build:
     machine:
-      - image: circleci/classic:edge
-      - image: circleci/mysql:5.7
+      image: circleci/classic:edge
     steps:
       - checkout
-      # - run:
-      #     name: "set master.key"
-      #     command: echo ${RAILS_MASTER_KEY}
       - run:
           name: change database.yml
           command: |

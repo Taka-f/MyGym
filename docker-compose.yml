@@ -16,13 +16,13 @@ services:
       - .:/app
     ports:
       - "3000:3000"
-    # links:
-    #   - db
+    links:
+      - db
     depends_on:
       - db
       - chrome
     tty: true
-    
+
   chrome:
     image: selenium/standalone-chrome:3.141.59-dubnium
     ports:
