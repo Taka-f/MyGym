@@ -1,24 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+アプリケーションの概要
+ジムでの体験を口コミで共有したり、自分の条件に合ったジムを探すことができるジム投稿サービス。
 
-Things you may want to cover:
+技術一覧
+・AWS EC2/RDSを用いたRails本番環境構築
+・EC2上にDockerを展開、Nginxコンテナで受けてRailsコンテナに受け渡し
+・AWS ACMでSSL証明書を発行し、SSL化
+・独自ドメインRoute53使用
+・docker-composeを用いたRails開発環境構築
+・CircleCIによる自動ビルド＆テスト
+・Gitによる自動デプロイ
+・RSpecで単体・統合テスト
+・RSpecのsystemspecではdocker-seleniumをコンテナで起動
+・Ajaxを用いた非同期処理（お気に入り登録/解除、口コミへのいいね、写真などの切り替え表示）
+・Bootstrapによるレスポンシブ対応
+・slimにて記述
 
-* Ruby version
+アプリケーションの機能ポイント
+・SNS、Twitter,Facebook,Googleのアカウントを使ったログイン機能
+・Twitter,Facebook,Googleのアカウントでログインした際、ユーザー写真をそのまま引き継いて使える
+・ジムの詳細で住所にGoogleMapAPIで地図を表示
+・店名、エリア、こだわりタグによる絞り込み検索で自分に合ったジムが探せる(N1問題解決済み)
+・口コミには５つ星で評価ができる
+・登録写真はAjaxによりその場で変更確認できる
+・ジムのお気に入り登録、Twitter ,Facebookでshare可能
+・口コミに対し役に立つボタンがありその口コミの信頼度がわかる
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+環境
+■フレームワーク
+　Ruby on Rails 5.2
+■インフラ
+　AWS EC2, Docker
+■データベース
+　AWS RDS, Mysql5.7
+■アプリケーションサーバー
+　Puma
+■Webサーバー
+　Nginx
