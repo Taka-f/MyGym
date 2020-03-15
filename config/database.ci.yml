@@ -4,6 +4,5 @@ test:
   pool: 5
   username: 'root'
   port: 3306
-  host: db
-  password: password
+  host: '127.0.0.1'
   database: ci_test
