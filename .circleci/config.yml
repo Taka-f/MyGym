@@ -24,7 +24,7 @@ jobs:
       #     command: docker-compose restart
       - run:
           name: sleep for waiting launch db
-          command: sleep 1
+          command: sleep 3
       - run:
           name: docker-compose ps
           command: docker-compose logs
