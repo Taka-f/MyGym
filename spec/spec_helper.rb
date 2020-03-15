@@ -15,8 +15,11 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'capybara/rspec'
+require 'rspec/retry'
 
 RSpec.configure do |config|
+  config.verbose_retry = true
+  config.display_try_failure_messages = true
   # config.before(:each, type: :system) do
   #   driven_by :rack_test
   # end
