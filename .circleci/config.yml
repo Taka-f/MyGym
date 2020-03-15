@@ -1,41 +1,53 @@
 version: 2
 jobs:
   build:
-    machine:
-      image: circleci/classic:edge
-      environment:
-        RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+        environment:
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      - image: selenium/standalone-chrome:3.5.3
+        ports:
+          - 4444:4444
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_HOST: '%'
+    working_directory: ~/app
     steps:
       - checkout
+      - run:
+          name: Install System Dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libappindicator1 fonts-liberation
+            export CHROME_BIN=/usr/bin/google-chrome
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome*.deb
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Bundle Install
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: change database.yml
           command: |
             rm ./config/database.yml
             mv ./config/database.ci.yml ./config/database.yml
       - run:
-          name: build
-          command: docker-compose build
+          name: Create DB
+          command: bundle exec rake db:create db:schema:load --trace
       - run:
-          name: docker-compose up
-          command: docker-compose up -d
-      # - run:
-      #     name: bundle install
-      #     command: docker-compose run web bundle
-      # - run:
-      #     name: docker-compose restart
-      #     command: docker-compose restart
-      - run:
-          name: sleep for waiting launch db
-          command: sleep 3
-      - run:
-          name: docker-compose ps
-          command: docker-compose logs
-      - run:
-          name: dbsetup
-          command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-      - run:
-          name: RSpec test
-          command: docker-compose exec web bin/rspec
-      - run:
-          name: docker-compose down
-          command: docker-compose down
+          name: Run Tests
+          command: RAILS_ENV=test bundle exec rspec
+      - store_test_results:
+          path: /tmp/test-results
