@@ -2,7 +2,8 @@ version: 2
 jobs:
   build:
     machine:
-      image: circleci/classic:edge
+      - image: circleci/classic:edge
+      - image: circleci/mysql:5.7
     steps:
       - checkout
       # - run:
