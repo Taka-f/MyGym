@@ -38,6 +38,30 @@
 #     end
 #   end
 # end
+# Capybara.register_driver :chrome do |app|
+#   Capybara::Selenium::Driver.new(app, browser: :chrome)
+# end
+
+# Capybara.register_driver :headless_chrome do |app|
+#   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+#     chromeOptions: { args: %w(headless no-sandbox) }
+#   )
+
+#   if ENV['SELENIUM_DRIVER_URL'].present?
+#     Capybara::Selenium::Driver.new(
+#       app,
+#       browser: :remote,
+#       url: ENV.fetch('SELENIUM_DRIVER_URL'),
+#       desired_capabilities: capabilities
+#     )   
+#   else
+#     Capybara::Selenium::Driver.new app,
+#       browser: :chrome,
+#       desired_capabilities: capabilities
+#   end 
+# end
+
+# Capybara.javascript_driver = :headless_chrome
 # ----------------------------------
 Capybara.server_host = Socket.ip_address_list.detect{|addr| addr.ipv4_private?}.ip_address
 Capybara.server_port = 4444
