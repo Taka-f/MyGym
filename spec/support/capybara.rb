@@ -1,86 +1,48 @@
-# require 'capybara/rspec'
+Capybara.server = :puma, { Silent: true }
 
-# RSpec.configure do |config|
-#   config.before(:each, type: :system) do
-#     driven_by :selenium, using: :headless_chrome, options: {
-#       browser: :remote,
-#       url: ENV.fetch("SELENIUM_DRIVER_URL"),
-#       desired_capabilities: :chrome
-#     }
-#     Capybara.server_host = 'web'
-#     Capybara.app_host='http://web'
-#   end
-# end
+Capybara.register_driver :chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
 
-# RSpec.configure do |config|
-#   config.before(:each, type: :system) do
-#     driven_by :rack_test
-#   end
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
 
-#   config.before(:each, type: :system, js: true) do
-#     driven_by :selenium_chrome_headless
-#   end
-# end
-# RSpec.configure do |config|
-#   config.before(:each, type: :system) do
-#     driven_by :rack_test
-#   end
-
-#   config.before(:each, type: :system, js: true) do
-#     if ENV["SELENIUM_DRIVER_URL"].present?
-#       driven_by :selenium, using: :chrome,
-#                            options: {
-#                                browser: :remote,
-#                                url: ENV.fetch("SELENIUM_DRIVER_URL"),
-#                                desired_capabilities: :chrome}
-#     else
-#       driven_by :selenium_chrome_headless
-#     end
-#   end
-# end
-# Capybara.register_driver :chrome do |app|
-#   Capybara::Selenium::Driver.new(app, browser: :chrome)
-# end
-
-# Capybara.register_driver :headless_chrome do |app|
-#   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-#     chromeOptions: { args: %w(headless no-sandbox) }
-#   )
-
-#   if ENV['SELENIUM_DRIVER_URL'].present?
-#     Capybara::Selenium::Driver.new(
-#       app,
-#       browser: :remote,
-#       url: ENV.fetch('SELENIUM_DRIVER_URL'),
-#       desired_capabilities: capabilities
-#     )   
-#   else
-#     Capybara::Selenium::Driver.new app,
-#       browser: :chrome,
-#       desired_capabilities: capabilities
-#   end 
-# end
-
-# Capybara.javascript_driver = :headless_chrome
-# ----------------------------------
-Capybara.server_host = Socket.ip_address_list.detect{|addr| addr.ipv4_private?}.ip_address
-Capybara.server_port = 4444
-
-Capybara.register_driver :selenium_remote do |app|
-  url = "http://chrome:4444/wd/hub"
-  opts = { desired_capabilities: :chrome, browser: :remote, url: url }
-  driver = Capybara::Selenium::Driver.new(app, opts)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
-RSpec.configure do |config|
+Capybara.javascript_driver = :chrome_headless
 
+# Setup rspec
+RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :rack_test
   end
 
   config.before(:each, type: :system, js: true) do
-    driven_by :selenium_remote
-    host! "http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}"
+    driven_by :chrome_headless
   end
-
 end
+# ----------------------------------
+# Capybara.server_host = Socket.ip_address_list.detect{|addr| addr.ipv4_private?}.ip_address
+# Capybara.server_port = 4444
+
+# Capybara.register_driver :selenium_remote do |app|
+#   url = "http://chrome:4444/wd/hub"
+#   opts = { desired_capabilities: :chrome, browser: :remote, url: url }
+#   driver = Capybara::Selenium::Driver.new(app, opts)
+# end
+
+# RSpec.configure do |config|
+
+#   config.before(:each, type: :system) do
+#     driven_by :rack_test
+#   end
+
+#   config.before(:each, type: :system, js: true) do
+#     Capybara.javascript_driver = :headless_chrome
+#     # driven_by :selenium_remote
+#     # host! "http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}"
+#   end
+
+# end
