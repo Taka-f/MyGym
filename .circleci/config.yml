@@ -8,7 +8,7 @@ jobs:
           RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       - image: selenium/standalone-chrome:3.5.3
         ports:
-          - 4445:4445
+          - 4444:4444
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
