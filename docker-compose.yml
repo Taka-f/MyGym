@@ -22,8 +22,8 @@ services:
       - db
       # - chrome
     tty: true
-    # environment:
-    #   - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
+    environment:
+      SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
   # selenium_chrome:
   #   image: selenium/standalone-chrome-debug
   #   logging:
