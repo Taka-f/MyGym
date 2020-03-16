@@ -22,19 +22,22 @@ services:
       - db
       # - chrome
     tty: true
-    environment:
-      SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
-  # selenium_chrome:
+    # environment:
+    #   SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
+  selenium_chrome:
+    image: selenium/standalone-chrome:3.5.3
+    # ports:
+    #   - 4444:4444
   #   image: selenium/standalone-chrome-debug
   #   logging:
   #     driver: none
   #   ports: 
   #     - "5900:5900"
-  chrome:
-    image: selenium/standalone-chrome:3.141.59-dubnium
-    ports:
-      - 4444:4444
-      - 5900:5900
+  # chrome:
+  #   image: selenium/standalone-chrome:3.141.59-dubnium
+    # ports:
+    #   - 4444:4444
+  #     - 5900:5900
   nginx:
     build: containers/nginx
     ports:
@@ -43,3 +46,5 @@ services:
       - web
     depends_on:
       - web
+    environment:
+      SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
