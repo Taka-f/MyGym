@@ -4,15 +4,15 @@ describe 'Users', type: :system do
   let(:user) { FactoryBot.create(:user) }
   # 新規登録ができること
   it 'create new user' do
-    # visit root_path
-    visit new_user_registration_path
+    visit root_path
+    # visit new_user_registration_path
     expect {
-      # click_on '新規登録'
+      click_on '新規登録'
       fill_in '名前', with: 'user1'
       fill_in 'メールアドレス', with: 'test@mail.com'
       fill_in 'パスワード', with: 'password', match: :first
       fill_in '確認用パスワード', with: 'password'
-      click_button 'アカウント登録'
+      click_on 'アカウント登録'
 
       expect(page).to have_content 'アカウント登録が完了しました。'
     }.to change(User, :count).by(1)
@@ -22,18 +22,21 @@ describe 'Users', type: :system do
     sign_in_as(user)
     visit root_path
     click_on 'マイページ'
-    click_button 'アカウント編集'
+    click_on 'アカウント編集'
     # visit edit_user_registration_path
     attach_file "user[image]", "#{Rails.root}/spec/fixtures/test.jpeg"
     fill_in '名前', with: 'test2'
-    click_button '更新'
+    click_on '更新'
     expect(page).to have_content 'アカウント情報を変更しました。'
   end
 
   # ユーザーはアカウントを削除できること
   it 'delete user account', js: true do
     sign_in_as(user)
-    visit edit_user_registration_path
+    # visit edit_user_registration_path
+    visit root_path
+    click_on 'マイページ'
+    click_on 'アカウント編集'
     click_on 'アカウント削除'
     expect {
       expect(page.driver.browser.switch_to.alert.text).to eq "本当によろしいですか?"
