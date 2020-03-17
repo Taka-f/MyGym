@@ -75,7 +75,8 @@ end
 group :test do
   gem 'capybara', '~> 2.15'
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
-  # gem 'webdrivers'
+  gem "rspec_junit_formatter"
+  gem 'rspec-retry'
 end
 
 group :production do

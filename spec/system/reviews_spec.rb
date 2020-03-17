@@ -30,16 +30,18 @@ describe 'reviews', type: :system do
     end
   
     # 口コミの削除ができること
-    it 'able to delete the review', js: true do
+    it 'able to delete the review', js: true, retry: 5 do
       visit gym_path(gym)
-      within '.review-edit' do
-        click_on '削除'
+      wait_for_ajax do
+        within '.review-edit' do
+          click_on '削除'
+        end
+        expect {
+          expect(page.driver.browser.switch_to.alert.text).to eq "本当に削除してもよろしいですか？"
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content "口コミを削除しました"
+        }.to change{ Review.count }.by(-1)
       end
-      expect {
-        expect(page.driver.browser.switch_to.alert.text).to eq "本当に削除してもよろしいですか？"
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content "口コミを削除しました"
-      }.to change{ Review.count }.by(-1)
     end
   end
   

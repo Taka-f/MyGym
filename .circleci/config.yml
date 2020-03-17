@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5.1-node
+        environment:
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+          SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
+      - image: selenium/standalone-chrome:3.5.3
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_HOST: '%'
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Bundle Install
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: change database.yml
+          command: |
+            rm ./config/database.yml
+            mv ./config/database.ci.yml ./config/database.yml
+      - run:
+          name: Create DB
+          command: bundle exec rake db:create db:schema:load --trace
+      - run:
+          name: Run Tests
+          command: RAILS_ENV=test bundle exec rspec
+      - store_test_results:
+          path: /tmp/test-results

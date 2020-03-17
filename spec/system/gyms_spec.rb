@@ -42,16 +42,19 @@ describe "Gyms", type: :system do
     end
   
     # 投稿を削除できること
-    it 'able to delete gym', js: true do
+    it 'able to delete gym', js: true, retry: 5 do
       visit gym_path(gym)
-      within '#gym-info' do
-        click_on "削除"
+      wait_for_ajax do
+        within '#gym-info' do
+          click_on "削除"
+        end
+        
+        expect {
+          expect(page.driver.browser.switch_to.alert.text).to eq "本当に削除してもよろしいですか？"
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content "#{gym.name}の投稿を削除しました"
+        }.to change{ Gym.count }.by(-1)
       end
-      expect {
-        expect(page.driver.browser.switch_to.alert.text).to eq "本当に削除してもよろしいですか？"
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content "#{gym.name}の投稿を削除しました"
-      }.to change{ Gym.count }.by(-1)
     end
     # ジムを検索できること
     context 'search' do
