@@ -8,10 +8,6 @@ jobs:
           RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
           SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
       - image: selenium/standalone-chrome:3.5.3
-      # - image: selenium/standalone-chrome:3.141.59-dubnium
-      #   ports:
-      #     - 4444:4444
-      #     - 5900:5900
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
@@ -19,15 +15,6 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      # - run:
-      #     name: Install System Dependencies
-      #     command: |
-      #       sudo apt-get update
-      #       sudo apt-get install -y libappindicator1 fonts-liberation
-      #       export CHROME_BIN=/usr/bin/google-chrome
-      #       wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      #       sudo dpkg -i google-chrome*.deb
-      
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe 'Users', type: :system do
+describe 'Users', type: :system, js: true do
   let(:user) { FactoryBot.create(:user) }
   # 新規登録ができること
   it 'create new user' do
     visit root_path
     expect {
-      click_link '新規登録'
+      click_on '新規登録'
       fill_in '名前', with: 'user1'
       fill_in 'メールアドレス', with: 'test@mail.com'
       fill_in 'パスワード', with: 'password', match: :first
@@ -27,14 +27,16 @@ describe 'Users', type: :system do
   end
 
   # ユーザーはアカウントを削除できること
-  it 'delete user account', js: true do
+  it 'delete user account', js: true, retry: 5 do
     sign_in_as(user)
     visit edit_user_registration_path
-    click_on 'アカウント削除'
-    expect {
-      expect(page.driver.browser.switch_to.alert.text).to eq "本当によろしいですか?"
-      page.driver.browser.switch_to.alert.accept
-      expect(page).to have_content "アカウントを削除しました。またのご利用をお待ちしております。"
-    }.to change{ User.count }.by(-1)
+    wait_for_ajax do
+      click_on 'アカウント削除'
+      expect {
+        expect(page.driver.browser.switch_to.alert.text).to eq "本当によろしいですか?"
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content "アカウントを削除しました。またのご利用をお待ちしております。"
+      }.to change{ User.count }.by(-1)
+    end
   end
 end
