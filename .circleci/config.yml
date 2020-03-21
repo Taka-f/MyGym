@@ -3,6 +3,8 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
+    environment:
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     steps:
       - checkout
       # - run:
