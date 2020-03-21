@@ -7,11 +7,11 @@ jobs:
     #   RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     steps:
       - checkout
-      # - run:
-      #     name: change database.yml
-      #     command: |
-      #       rm ./config/database.yml
-      #       mv ./config/database.ci.yml ./config/database.yml
+      - run:
+          name: change database.yml
+          command: |
+            rm ./config/database.yml
+            mv ./config/database.ci.yml ./config/database.yml
       - run:
           name: build
           command: docker-compose build
