@@ -16,9 +16,11 @@ jobs:
           name: build
           command: docker-compose build
           
-      - run:
-          name: docker-compose up
-          command: docker-compose up -d
+          - run:
+            name: docker-compose up
+            command: docker-compose up -d
+            environment:
+              RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       - run:
           name: sleep for waiting launch db
           command: sleep 10
@@ -28,7 +30,7 @@ jobs:
       - run:
           name: dbsetup
           command: |
-            docker-compose run web bundle RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+            docker-compose logs
       - run:
           name: RSpec test
           command: docker-compose exec web bin/rspec 
