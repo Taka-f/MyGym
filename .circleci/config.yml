@@ -3,10 +3,12 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    environment:
-      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    
     steps:
       - checkout
+      - run:
+        command: |
+          echo RAILS_MASTER_KEY=${RAILS_MASTER_KEY} > ~/config/master.key
       # - run:
       #     name: change database.yml
       #     command: |
