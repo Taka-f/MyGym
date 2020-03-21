@@ -16,11 +16,11 @@ jobs:
           name: build
           command: docker-compose build
           
-          - run:
-            name: docker-compose up
-            command: docker-compose up -d
-            environment:
-              RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      - run:
+          name: docker-compose up
+          command: docker-compose up -d
+          environment:
+            RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       - run:
           name: sleep for waiting launch db
           command: sleep 10
