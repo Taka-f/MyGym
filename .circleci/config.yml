@@ -33,7 +33,7 @@ jobs:
             docker-compose logs
       - run:
           name: RSpec test
-          command: docker-compose run web bin/rspec 
+          command: docker-compose run web bin/rspec RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
           
       - run:
           name: docker-compose down
