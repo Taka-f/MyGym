@@ -3,12 +3,10 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    
+    environment:
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     steps:
       - checkout
-      - run:
-        command: |
-          echo RAILS_MASTER_KEY=${RAILS_MASTER_KEY} > ~/config/master.key
       # - run:
       #     name: change database.yml
       #     command: |
@@ -17,8 +15,7 @@ jobs:
       - run:
           name: build
           command: docker-compose build
-          environment:
-            RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+          
       - run:
           name: docker-compose up
           command: docker-compose up -d
@@ -27,12 +24,11 @@ jobs:
           command: sleep 10
       - run:
           name: dbsetup
-          command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+          command: docker-compose run web bin/rails db:create db:migrate RAILS_ENV=test 
       - run:
           name: RSpec test
           command: docker-compose run web bin/rspec
-          environment:
-            RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+          
       - run:
           name: docker-compose down
           command: docker-compose down
