@@ -33,7 +33,7 @@ jobs:
             docker-compose logs
       - run:
           name: RSpec test
-          command: docker-compose exec web bin/rspec 
+          command: docker-compose run web bin/rspec 
           
       - run:
           name: docker-compose down
