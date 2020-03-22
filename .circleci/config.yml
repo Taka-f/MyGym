@@ -48,8 +48,6 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-        # fingerprints:
-        #   - "e9:b9:87:62:8c:13:c6:34:1b:ee:25:15:ed:5c:ce:75"
       - run: ssh ${USER_NAME}@${HOST_NAME} 'cd MyGym && git pull'
 
 workflows:
