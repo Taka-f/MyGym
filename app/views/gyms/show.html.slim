@@ -79,9 +79,9 @@
       .reviews
         h2 口コミ
         div
-          = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom2"
         - if user_signed_in?
-          = render @gym.reviews
+          = link_to "口コミを投稿", new_gym_review_path(@gym), class: "btn-custom2"
+        = render @gym.reviews
       
       
     
