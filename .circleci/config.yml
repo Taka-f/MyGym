@@ -44,7 +44,7 @@ jobs:
 
   deploy:
     machine:
-      - image: circleci/classic:edge
+      image: circleci/classic:edge
     steps:
       - checkout
       - add_ssh_keys:
@@ -58,8 +58,8 @@ workflows:
     jobs:
       - build
       - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
