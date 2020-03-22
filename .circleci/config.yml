@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd ~/MyGym && git pull'
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd MyGym && git pull'
 
 workflows:
   version: 2
