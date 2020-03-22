@@ -301,9 +301,8 @@ Devise.setup do |config|
   # config.omniauth :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET'], scope: 'email', oauth_callback: "#{ENV['HOST']}/users/auth/twitter/callback"
   # config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], scope: 'email,calendar', redirect_uri: "#{ENV['HOST']}/users/auth/google_oauth2/callback"
   # OmniAuth.config.logger = Rails.logger if Rails.env.development?
-  if Rails.env.production?
-    config.omniauth :facebook, Rails.application.credentials.facebook[:key], Rails.application.credentials.facebook[:secret]
-    config.omniauth :twitter, Rails.application.credentials.twitter[:key], Rails.application.credentials.twitter[:secret]
-    config.omniauth :google_oauth2, Rails.application.credentials.google_oauth2[:key], Rails.application.credentials.google_oauth2[:secret], skip_jwt: true
-  end
+
+  config.omniauth :facebook, Rails.application.credentials.facebook[:key], Rails.application.credentials.facebook[:secret]
+  config.omniauth :twitter, Rails.application.credentials.twitter[:key], Rails.application.credentials.twitter[:secret]
+  config.omniauth :google_oauth2, Rails.application.credentials.google_oauth2[:key], Rails.application.credentials.google_oauth2[:secret], skip_jwt: true
 end
