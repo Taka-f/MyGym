@@ -7,9 +7,8 @@
 - EC2上にDockerを展開、Nginxコンテナで受けてRailsコンテナに受け渡し
 - AWS ACMでSSL証明書を発行し、SSL化
 - 独自ドメインRoute53使用
+- CircleCIによる自動ビルド＆テスト&デプロイ
 - docker-composeを用いたRails開発環境にて作成
-- CircleCIによる自動ビルド＆テスト
-- Gitによる自動デプロイ
 - RSpecにて単体・統合テスト
 - RSpecのsystemspecではdocker-seleniumをコンテナで起動
 - Ajaxを用いた非同期処理（お気に入り登録/解除、口コミへのいいね、写真などの切り替え表示）
