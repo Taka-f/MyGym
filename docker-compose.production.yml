@@ -1,0 +1,3 @@
+web:
+  environment:
+    RAILS_ENV: production
