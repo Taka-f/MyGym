@@ -1,6 +1,6 @@
 class GymsController < ApplicationController
   before_action :find_gym, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :areas, only: [:new, :create, :edit, :update]
   
   def index
