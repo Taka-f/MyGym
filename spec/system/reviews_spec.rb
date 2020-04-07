@@ -27,6 +27,24 @@ describe 'reviews', type: :system do
     it 'able to see the review on gym page' do
       visit gym_path(gym)
       expect(page).to have_content review.comment
+      expect(page).to have_content review.rating
+    end
+
+    it 'able to see the review on my page' do
+      click_on 'マイページ'
+      expect(page).to have_content review.comment
+    end
+
+    # レビューしたユーザーネームが確認できること
+    it 'abele to see the review user name' do
+      visit gym_path(gym)
+      expect(page).to have_content user.name
+    end
+
+    # レビュー件数が確認できること
+    it 'able to see the reviews count' do
+      visit root_path
+      expect(page).to have_content '1件のレビュー'
     end
   
     # 口コミの削除ができること
@@ -54,6 +72,13 @@ describe 'reviews', type: :system do
       visit gym_path(gym)
       expect(page).to have_no_content '編集'
       expect(page).to have_no_content '削除'
+    end
+  end
+  # ログインしてないユーザーは口コミを投稿できない
+  context 'review by without login' do
+    it 'unable to post review' do
+      visit gym_path(gym)
+      expect(page).to have_no_content '口コミを投稿'
     end
   end
 end

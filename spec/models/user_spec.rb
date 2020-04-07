@@ -44,6 +44,13 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors[:password]).to include("を入力してください")
     end
+    # パスワードが6文字以上でないと登録できないこと
+    it 'is invalid password minimum 6' do
+      user = build(:user, password: '12345')
+      user.valid?
+      expect(user.errors[:password]).to include("は6文字以上で入力してください")
+    end
+
     # 重複したメールアドレスなら無効な状態であること
     it "is invalid with a duplicate email" do
       create(:user, email: "test@email.com")

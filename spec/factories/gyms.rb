@@ -30,5 +30,7 @@ FactoryBot.define do
     pictures { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpeg'))] }
     user
     association :area
+    # association :tag
+    # tag.name { '24時間営業' }
   end
 end

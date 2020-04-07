@@ -8,7 +8,8 @@
 - AWS ACMでSSL証明書を発行し、SSL化
 - 独自ドメインRoute53使用
 - CircleCIによる自動ビルド＆テスト&デプロイ
-- docker-composeを用いたRails開発環境にて作成
+- docker-composeを用いたRails開発環境にて開発
+- S3バケットにてアップロード画像を管理
 - RSpecにて単体・統合テスト
 - RSpecのsystemspecではdocker-seleniumをコンテナで起動
 - Ajaxを用いた非同期処理（お気に入り登録/解除、口コミへのいいね、写真などの切り替え表示）
